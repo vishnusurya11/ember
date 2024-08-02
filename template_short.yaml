@@ -1,0 +1,92 @@
+template_name: "Basic Video Sequence Template"
+
+input_video_files:
+  - path: "D:/langchain/Ember/video/fire.mp4"
+  - path: "D:/langchain/Ember/video/snow.mp4"
+
+output_video_file: "D:/langchain/Ember/output_1.mp4"
+
+input_audio_file: "D:/langchain/Ember/audio/Anachronist.mp3"
+
+subtitles:
+  - text: "Subtitle at center-bottom."
+    start_time: 0
+    end_time: 5
+    position: 
+      x: "center"
+      y: "bottom"
+    fontsize: 85
+    font: "Arial"
+    color: "#FFFFFF"  # White
+  - text: "Subtitle at left-bottom."
+    start_time: 6
+    end_time: 10
+    position: 
+      x: "left"
+      y: "bottom"
+    fontsize: 85
+    font: "Times New Roman"
+    color: "#FF0000"  # Red
+  - text: "Subtitle at right-bottom."
+    start_time: 11
+    end_time: 15
+    position: 
+      x: "right"
+      y: "bottom"
+    fontsize: 85
+    font: "Verdana"
+    color: "#00FF00"  # Green
+  - text: "Subtitle at center-top."
+    start_time: 16
+    end_time: 20
+    position: 
+      x: "center"
+      y: "top"
+    fontsize: 85
+    font: "Courier New"
+    color: "#0000FF"  # Blue
+  - text: "Subtitle at left-top."
+    start_time: 21
+    end_time: 25
+    position: 
+      x: "left"
+      y: "top"
+    fontsize: 85
+    font: "Comic Sans MS"
+    color: "#FFFF00"  # Yellow
+  - text: "Subtitle at right-top."
+    start_time: 26
+    end_time: 30
+    position: 
+      x: "right"
+      y: "top"
+    fontsize: 85
+    font: "Arial"
+    color: "#FF00FF"  # Magenta
+  - text: "Subtitle at center-center."
+    start_time: 31
+    end_time: 35
+    position: 
+      x: "center"
+      y: "center"
+    fontsize: 85
+    font: "Times New Roman"
+    color: "#00FFFF"  # Cyan
+  - text: "Subtitle at left-center."
+    start_time: 36
+    end_time: 40
+    position: 
+      x: "left"
+      y: "center"
+    fontsize: 24
+    font: "Verdana"
+    color: "#FFA500"  # Orange
+  - text: "Subtitle at right-center."
+    start_time: 36
+    end_time: 40
+    position: 
+      x: "right"
+      y: "center"
+    fontsize: 24
+    font: "Courier New"
+    color: "#800080"  # Purple

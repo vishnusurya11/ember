@@ -1,0 +1,10 @@
+# folders
+audio/*
+video/*
+output/*
+__pycache__/*
+
+# files
+*.mp3
+*.mp4
+*.pyc
