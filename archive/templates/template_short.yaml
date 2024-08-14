@@ -1,12 +1,14 @@
 template_name: "Basic Video Sequence Template"
-
+ 
 input_video_files:
+  - path: "D:/langchain/Ember/video/rain.mp4"
+  - path: "D:/langchain/Ember/video/space.mp4"
   - path: "D:/langchain/Ember/video/fire.mp4"
   - path: "D:/langchain/Ember/video/snow.mp4"
 
 output_video_file: "D:/langchain/Ember/output.mp4"
 
-input_audio_file: "D:/langchain/Ember/audio/Anachronist.mp3"
+input_audio_file: "D:/langchain/Ember/audio/funk.mp3"
 
 subtitles:
   - text: "Subtitle at center-bottom."

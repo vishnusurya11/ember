@@ -57,5 +57,5 @@ def create_video_template(template):
     final_clip.write_videofile(template['output_video_file'], codec="libx264", fps=24)
 
 if __name__ == "__main__":
-    template = load_template("template_short.yaml")
+    template = load_template("templates/template_short.yaml")
     create_video_template(template)
