@@ -1,0 +1,63 @@
+Mercury
+Venus
+Earth
+Mars
+Jupiter
+Saturn
+Uranus
+Neptune
+Pluto
+Eris
+Haumea
+Makemake
+Ceres
+Moon
+Europa
+Ganymede
+Callisto
+Titan
+Enceladus
+Triton
+Sun
+Proxima Centauri
+Alpha Centauri A
+Alpha Centauri B
+Sirius
+Betelgeuse
+Rigel
+Vega
+Polaris
+Antares
+Proxima b
+Kepler-186f
+Kepler-22b
+Gliese 581g
+TRAPPIST-1d
+WASP-12b
+Milky Way
+Andromeda
+Triangulum Galaxy
+Large Magellanic Cloud
+Small Magellanic Cloud
+Sombrero Galaxy
+Whirlpool Galaxy
+Orion Nebula
+Eagle Nebula
+Crab Nebula
+Carina Nebula
+Helix Nebula
+Ring Nebula
+Horsehead Nebula
+Halley's Comet
+Comet Hale-Bopp
+Comet NEOWISE
+Comet Encke
+Comet Hyakutake
+Vesta
+Pallas
+Ceres
+Sagittarius A*
+Cygnus X-1
+Quasars
+Pulsars
+Sirius B

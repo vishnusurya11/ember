@@ -1,0 +1,90 @@
+Oak
+Maple
+Pine
+Birch
+Willow
+Redwood
+Cedar
+Palm
+Eucalyptus
+Cherry Blossom
+Rose
+Tulip
+Sunflower
+Lily
+Daisy
+Orchid
+Lavender
+Daffodil
+Iris
+Peony
+Hibiscus
+Azalea
+Rhododendron
+Boxwood
+Hydrangea
+Forsythia
+Lilac
+Juniper
+Holly
+Spirea
+Basil
+Mint
+Thyme
+Rosemary
+Oregano
+Parsley
+Cilantro
+Sage
+Lavender
+Chives
+Ivy
+Wisteria
+Clematis
+Grapevine
+Morning Glory
+Honeysuckle
+Bougainvillea
+Jasmine
+Trumpet Vine
+Climbing Rose
+Wheat
+Corn
+Rice
+Barley
+Rye
+Bamboo
+Fescue
+Bluegrass
+Zoysia
+St. Augustine Grass
+Aloe Vera
+Agave
+Cactus
+Echeveria
+Sedum
+Jade Plant
+Prickly Pear
+Saguaro
+Barrel Cactus
+Haworthia
+Boston Fern
+Maidenhair Fern
+Staghorn Fern
+Asparagus Fern
+Bird's Nest Fern
+Sword Fern
+Bracken Fern
+Ostrich Fern
+Autumn Fern
+Cinnamon Fern
+Water Lily
+Lotus
+Duckweed
+Water Hyacinth
+Water Lettuce
+Anacharis
+Hornwort
+Vallisneria
+Amazon Sword
+Java Fern
