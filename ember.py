@@ -6,6 +6,7 @@
 import os
 import sys
 from read_input_file import pick_random_topic
+from chat_model import generate_short_script
 
 def create_folders_if_not_exist(base_directory, folders):
     for folder in folders:
@@ -25,3 +26,6 @@ if __name__ == "__main__":
     # Pick a random topic from the input directory
     random_topic = pick_random_topic(input_files_directory)
     print(f"Randomly selected topic: {random_topic}")
+
+    result = generate_short_script(random_topic)
+    print(result)
