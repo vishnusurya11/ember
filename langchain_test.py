@@ -6,7 +6,11 @@ import os
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
-
+from dotenv import load_dotenv
+from langchain.prompts import ChatPromptTemplate
+from langchain.schema.output_parser import StrOutputParser
+from langchain.schema.runnable import RunnableBranch
+from langchain_openai import ChatOpenAI
 
 from langchain_core.prompts import (
     ChatPromptTemplate,
@@ -22,56 +26,89 @@ model = ChatOpenAI(model="gpt-4o-mini")
 
 
 
-
-examples = [
-    {"input": "India", "output": """India, located in South Asia, is the 7th largest country by land area and the 2nd most populous nation, with over 1.4 billion people. 
-    It spans diverse zones, from the Himalayas in the north to tropical coasts in the south. 
-    India experiences a range of climates, from scorching summers to monsoon rains and snowy winters in the north. 
-    As the world’s largest democracy, India gained independence in 1947 and operates as a federal parliamentary republic. 
-    Known for its exports like textiles, IT services, and spices, India also imports crude oil, electronics, and machinery to fuel its growing economy. 
-    Fun fact: India is the birthplace of yoga, a practice over 5,000 years old and a gift to the world!"""},
-    {"input": "USA", "output": """Located in North America, the United States is the 3rd largest country by both land area and population, with over 331 million people. It spans diverse zones, from the Arctic cold of Alaska to the tropical warmth of Florida. The U.S. experiences a wide range of climates, from arid deserts to humid subtropics. As a federal republic, the U.S. has a significant global influence, having gained independence in 1776. Known for its exports like technology, machinery, and vehicles, the U.S. imports crude oil, electronics, and pharmaceuticals. Fun fact: The U.S. is home to the world’s largest economy and some of the most iconic landmarks, like the Statue of Liberty and the Grand Canyon!"""},
-]
-
-
-
-# This is a prompt template used to format each individual example.
-example_prompt = ChatPromptTemplate.from_messages(
+# Define prompt templates for different feedback types
+positive_feedback_template = ChatPromptTemplate.from_messages(
     [
-        ("human", "{input}"),
-        ("ai", "{output}"),
-    ]
-)
-few_shot_prompt = FewShotChatMessagePromptTemplate(
-    example_prompt=example_prompt,
-    examples=examples,
-)
-
-
-
-final_prompt = ChatPromptTemplate.from_messages(
-    [
-        ("system", "you are a youtube content writer who writes scripts for shorts that are under 60 seconds"),
-        few_shot_prompt,
-        ("human", "Tell me about {input}?"),
+        ("system", "You are a helpful assistant."),
+        ("human",
+         "Generate a thank you note for this positive feedback: {feedback}."),
     ]
 )
 
+negative_feedback_template = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are a helpful assistant."),
+        ("human",
+         "Generate a response addressing this negative feedback: {feedback}."),
+    ]
+)
 
-chain = final_prompt | model
+neutral_feedback_template = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are a helpful assistant."),
+        (
+            "human",
+            "Generate a request for more details for this neutral feedback: {feedback}.",
+        ),
+    ]
+)
 
-result = chain.invoke({"input": "Iceland"})
+escalate_feedback_template = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are a helpful assistant."),
+        (
+            "human",
+            "Generate a message to escalate this feedback to a human agent: {feedback}.",
+        ),
+    ]
+)
+
+# Define the feedback classification template
+classification_template = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are a helpful assistant."),
+        ("human",
+         "Classify the sentiment of this feedback as positive, negative, neutral, or escalate: {feedback}."),
+    ]
+)
+
+# Define the runnable branches for handling feedback
+branches = RunnableBranch(
+    (
+        lambda x: "positive" in x,
+        positive_feedback_template | model | StrOutputParser()  # Positive feedback chain
+    ),
+    (
+        lambda x: "negative" in x,
+        negative_feedback_template | model | StrOutputParser()  # Negative feedback chain
+    ),
+    (
+        lambda x: "neutral" in x,
+        neutral_feedback_template | model | StrOutputParser()  # Neutral feedback chain
+    ),
+    escalate_feedback_template | model | StrOutputParser()
+)
+
+# Create the classification chain
+classification_chain = classification_template | model | StrOutputParser()
 
 
+print("############################################################")
+review = "The product is terrible. It broke after just one use and the quality is very poor."
 
-# ---- LangChain OpenAI Chat Model Example ----
+print(f" classification_chain --> {classification_chain.invoke({"feedback": review})}")
+print("############################################################")
+# Combine classification and response generation into one chain
+chain = classification_chain | branches
 
+# Run the chain with an example review
+# Good review - "The product is excellent. I really enjoyed using it and found it very helpful."
+# Bad review - "The product is terrible. It broke after just one use and the quality is very poor."
+# Neutral review - "The product is okay. It works as expected but nothing exceptional."
+# Default - "I'm not sure about the product yet. Can you tell me more about its features and benefits?"
 
-# Invoke the model with message
-print(f"{result.content}")
+review = "The product is terrible. It broke after just one use and the quality is very poor."
+result = chain.invoke({"feedback": review})
 
-
-
-# Print all loaded environment variables
-# for key, value in os.environ.items():
-#     print(f"{key}: {value}")
+# Output the result
+print(result)
