@@ -2,6 +2,14 @@
 ### The focus of this file is to setup all the logs and folder structures 
 ### needed for the Ember to work
 ### Note : Ember won't be just one program but a multiple process combnations
+"""
+TODO:
+Currently, the topic is chosen randomly from a file. The goal is to modify the system so that topics are selected from a DataFrame instead. 
+In this setup, each row will represent a record, and each column will represent a specific topic, such as 'fun fact,' 'location,' or any other 
+interesting details that can be used as a short script. New rows and columns will be added over time. Once a topic is selected, it should be 
+marked (e.g., with an 'x' or another indicator), so that in subsequent rounds, only the unmarked topics will be eligible for selection. 
+This approach will maintain randomness while ensuring that each topic is eventually used.
+"""
 
 import os
 import sys
