@@ -3,6 +3,7 @@ audio/*
 video/*
 output/*
 __pycache__/*
+tutorial-env/*
 
 # files
 *.mp3
