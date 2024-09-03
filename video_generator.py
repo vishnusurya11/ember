@@ -81,7 +81,7 @@ def generate_and_concatenate_videos_ffmpeg(audio_base_path, images_base_path, se
         os.remove("file_list.txt")
 
 if __name__ == "__main__":
-    base_folder = r'E:\Ember\Ember\ember\data\20240902180118'
+    base_folder = r'E:\Ember\Ember\ember\data\20240902225913'
 
     # Load the story config to get the images_output_folder
     json_file = os.path.join(base_folder, f"script_{os.path.basename(base_folder)}.json")
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     images_output_folder = story_data.get("images_output")
     audio_folder = os.path.join(base_folder, 'audiolist')
     video_output_folder = os.path.join(base_folder, 'videos')
-    final_video_output = os.path.join(video_output_folder, "final_story.mp4")
+    final_video_output = os.path.join(base_folder, "final_story.mp4")
 
     if not images_output_folder:
         raise ValueError("images_output field not found in the JSON configuration.")
