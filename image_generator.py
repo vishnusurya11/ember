@@ -12,8 +12,8 @@ def extract_timestamp_from_path(path):
 def generate_images_for_prompts(server_address, workflow_file, save_dir, sentences, timestamp, num_iterations=3):
     generator = ImageGenerator(server_address, workflow_file)
 
-    images_folder = os.path.join(save_dir, "images")
-    os.makedirs(images_folder, exist_ok=True)
+    # images_folder = os.path.join(save_dir, "images")
+    # os.makedirs(images_folder, exist_ok=True)
 
     for key, value in tqdm(sentences.items(), desc="Generating Images for Sentences"):
         prompt = value.get("prompt", "").strip()
@@ -51,7 +51,7 @@ def generate_images_for_prompts(server_address, workflow_file, save_dir, sentenc
 if __name__ == "__main__":
     # High-level path provided
     base_folder = r'E:\Ember\Ember\ember\data\20240902180118'
-    num_iterations = 1
+    num_iterations = 3
     # Extract the timestamp from the base folder path
     timestamp = extract_timestamp_from_path(base_folder)
 
