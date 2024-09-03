@@ -6,14 +6,25 @@ from video_generator import generate_and_concatenate_videos_ffmpeg  # Assuming y
 import json
 from datetime import datetime
 import os
+import time
+from dotenv import load_dotenv
 
 if __name__ == "__main__":
+    #####################################################################################################
+    ############################### 0 - Initial setup ###################################################
+    #####################################################################################################
+    # Start measuring the time
+    start_time = time.time()
+    load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = 'E:\\Ember\\Ember\\ember\\data'
     
     # Define the topic for the story generation
-    input_dict = {'topic': 'a space story based on any detective story'}
-    
+    input_dict = {'topic': 'a medival story based on a any myth'}
+    input_mp3_path = 'sample_4.mp3'  # You can update this path if needed
+    #####################################################################################################
+    ############################### 1 - Story Generator #################################################
+    #####################################################################################################
     # Generate the initial story
     print("Generating the initial story...")
     story = generate_short_script(input_dict)
@@ -45,7 +56,13 @@ if __name__ == "__main__":
     
     # Print the location of the saved file
     print(f"\nStory saved to {filename}")
-    
+    story_end_time = time.time()
+    total_story_time = story_end_time - start_time
+
+    #####################################################################################################
+    ############################### 2 - Prompt Generator ################################################
+    #####################################################################################################
+    prompt_start_time = time.time()
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
     sentences_with_prompts = generate_prompts_for_sentences(story_dict.get("sentences", {}))
@@ -57,8 +74,15 @@ if __name__ == "__main__":
     
     print(f"Updated JSON with prompts saved to {filename}")
     
+    prompt_end_time = time.time()
+    total_prompt_time = prompt_end_time - prompt_start_time
+    
+    #####################################################################################################
+    ############################### 3 - Audio Generator #################################################
+    #####################################################################################################
+    audio_start_time = time.time()
     # Call the audio generation function using the folder path
-    input_mp3_path = 'sample_4.mp3'  # You can update this path if needed
+    
     wav_path, mp3_path = generate_audio_from_json(folder_name, input_mp3=input_mp3_path)
     
     # Update the JSON file with the audio output path
@@ -68,6 +92,15 @@ if __name__ == "__main__":
     
     print(f"Generated audio files:\nWAV: {wav_path}\nMP3: {mp3_path}")
     
+    audio_end_time = time.time()
+    total_audio_time = audio_end_time - audio_start_time
+
+    #####################################################################################################
+    ############################### 4 - Image Generator #################################################
+    #####################################################################################################
+
+    image_start_time = time.time()
+
     # Server and workflow configurations for image generation
     SERVER_ADDRESS = "127.0.0.1:8188"
     WORKFLOW_FILE = "flux_dev_space_example_16.json"
@@ -87,13 +120,21 @@ if __name__ == "__main__":
     
     print(f"Final JSON with all outputs saved to {filename}")
 
+    image_end_time = time.time()
+    total_image_time = image_end_time - image_start_time
+
+    #####################################################################################################
+    ############################### 5 - Video Generator #################################################
+    #####################################################################################################
+    video_start_time = time.time()
     # Generate the final video
     print("\nGenerating final video...")
     video_output_folder = os.path.join(folder_name, 'videos')
-    final_video_output = os.path.join(video_output_folder, "final_story.mp4")
+    final_video_output = os.path.join(folder_name, "final_story.mp4")
+    audio_folder = os.path.join(base_folder, 'audiolist')
     
     generate_and_concatenate_videos_ffmpeg(
-        audio_base_path=folder_name,
+        audio_base_path=audio_folder,
         images_base_path=final_image_folder,
         sentences=story_dict.get("sentences", {}),
         output_folder=video_output_folder,
@@ -109,3 +150,17 @@ if __name__ == "__main__":
 
     print(f"Final video has been generated at {final_video_output}")
     print(f"Updated JSON with video paths saved to {filename}")
+
+    video_end_time = time.time()
+    total_video_time = video_end_time - video_start_time
+    total_time = video_end_time - start_time
+
+    #####################################################################################################
+    ###############################  Conclusion #################################################
+    #####################################################################################################
+    print(f"\ntime taken to execute the story generation: {total_story_time:.2f} seconds")
+    print(f"\ntime taken to execute the prompt generation: {total_prompt_time:.2f} seconds")
+    print(f"\ntime taken to execute the audio generation: {total_audio_time:.2f} seconds")
+    print(f"\ntime taken to execute the image generation: {total_image_time:.2f} seconds")
+    print(f"\ntime taken to execute the video generation: {total_video_time:.2f} seconds")
+    print(f"\nTotal execution time: {total_time:.2f} seconds")
