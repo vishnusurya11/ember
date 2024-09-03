@@ -8,5 +8,6 @@ tutorial-env/*
 # files
 *.mp3
 *.mp4
+*.wav
 *.pyc
 .env
