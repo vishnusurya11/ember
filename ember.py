@@ -1,6 +1,7 @@
 from story_prompt import generate_short_script, improve_story, split_story_into_sentences  
 from audio_gen import generate_audio_from_json
 from prompt_generator import generate_prompts_for_sentences
+from image_generator import generate_images_for_prompts, extract_timestamp_from_path  # Assuming you save the previous script as image_generator.py
 import json
 from datetime import datetime
 import os
@@ -65,4 +66,22 @@ if __name__ == "__main__":
         json.dump(story_dict, f, indent=4)
     
     print(f"Generated audio files:\nWAV: {wav_path}\nMP3: {mp3_path}")
-    print(f"Final JSON with audio paths saved to {filename}")
+    
+    # Server and workflow configurations for image generation
+    SERVER_ADDRESS = "127.0.0.1:8188"
+    WORKFLOW_FILE = "flux_dev_space_example_16.json"
+    SAVE_DIR = folder_name
+
+    # Generate images for the prompts
+    print("\nGenerating images for the prompts...")
+    generate_images_for_prompts(SERVER_ADDRESS, WORKFLOW_FILE, SAVE_DIR, story_dict.get("sentences", {}), timestamp)
+
+    # Define the final image output path
+    final_image_folder = f"E:\\ComfyUI_windows_portable\\ComfyUI\\output\\api\\{timestamp}"
+    story_dict["images_output"] = final_image_folder
+
+    # Save the final JSON file with all outputs (prompts, audio, images)
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(story_dict, f, indent=4)
+    
+    print(f"Final JSON with all outputs saved to {filename}")
