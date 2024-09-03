@@ -1,7 +1,8 @@
 from story_prompt import generate_short_script, improve_story, split_story_into_sentences  
 from audio_gen import generate_audio_from_json
 from prompt_generator import generate_prompts_for_sentences
-from image_generator import generate_images_for_prompts, extract_timestamp_from_path  # Assuming you save the previous script as image_generator.py
+from image_generator import generate_images_for_prompts, extract_timestamp_from_path
+from video_generator import generate_and_concatenate_videos_ffmpeg  # Assuming you saved the video script as video_generator.py
 import json
 from datetime import datetime
 import os
@@ -85,3 +86,26 @@ if __name__ == "__main__":
         json.dump(story_dict, f, indent=4)
     
     print(f"Final JSON with all outputs saved to {filename}")
+
+    # Generate the final video
+    print("\nGenerating final video...")
+    video_output_folder = os.path.join(folder_name, 'videos')
+    final_video_output = os.path.join(video_output_folder, "final_story.mp4")
+    
+    generate_and_concatenate_videos_ffmpeg(
+        audio_base_path=folder_name,
+        images_base_path=final_image_folder,
+        sentences=story_dict.get("sentences", {}),
+        output_folder=video_output_folder,
+        final_output_path=final_video_output,
+        target_resolution="1080x1920",  # 9:16 aspect ratio
+        zoom_out=False  # No zoom effect for now
+    )
+
+    # Update the JSON with the video output path
+    story_dict["video_output"] = final_video_output
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(story_dict, f, indent=4)
+
+    print(f"Final video has been generated at {final_video_output}")
+    print(f"Updated JSON with video paths saved to {filename}")
