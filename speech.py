@@ -12,13 +12,13 @@ https://librivox.org/search
 """
 
 # Initial setup
-input_mp3 = 'sample_4.mp3'
-sample_input = 'sample_input.wav'
+input_mp3 = "sample_4.mp3"
+sample_input = "sample_input.wav"
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Convert MP3 to WAV for speaker embedding
 audio = AudioSegment.from_mp3(input_mp3)
-audio.export(sample_input, format='wav')
+audio.export(sample_input, format="wav")
 print(f"Converted '{input_mp3}' to '{sample_input}' successfully.")
 
 # Initialize TTS
@@ -27,7 +27,7 @@ print(f"Converted '{input_mp3}' to '{sample_input}' successfully.")
 
 # Assuming TTS is defined and working
 # model_manager = TTS().list_models()
-# 
+#
 # # Open a file named 'output.txt' in write mode with UTF-8 encoding
 # with open('output.txt', 'w', encoding='utf-8') as file:
 #     file.write(str(model_manager) + '\n')  # Write the string representation of model_manager to file
@@ -40,14 +40,13 @@ print(f"Converted '{input_mp3}' to '{sample_input}' successfully.")
 #             attribute_string = f"{attribute}: {value}\n"
 #             # Write the attribute string to the file
 #             file.write(attribute_string)
-    
+
 #     # Write a separator line
 #     file.write("--------------------------------------------\n")
 
 
-
 # Input text, stripping leading/trailing whitespace
-text_input="""
+text_input = """
 Host: "Welcome to 'Narrative Nexus,' where the boundaries of time, space, and fiction are merely guidelines! I'm Victor Stone, and tonight, we're chatting with The Boy Who Lived, Harry Potter. Harry, it’s your first time on the show—welcome!"
 
 Guest: "Thanks, Victor. It’s great to be here."
@@ -95,16 +94,23 @@ Guest: "Thanks, Victor!"
 text_input = text_input.strip()
 
 # Directory setup with sanitized subfolder name
-timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M')
-# Sanitize subfolder_name to remove non-alphanumeric characters except for underscores and spaces
-sanitized_text = ''.join(c if c.isalnum() or c in [' ', '_'] else '' for c in text_input[:10]).strip().replace(' ', '_')
+timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M")
+# Sanitize subfolder_name to remove non-alphanumeric characters except for
+# underscores and spaces
+sanitized_text = (
+    "".join(c if c.isalnum() or c in [" ", "_"] else "" for c in text_input[:10])
+    .strip()
+    .replace(" ", "_")
+)
 subfolder_name = f"{timestamp}_{sanitized_text}"
-data_folder = os.path.join('data', subfolder_name)
-audiolist_folder = os.path.join(data_folder, 'audiolist')
+data_folder = os.path.join("data", subfolder_name)
+audiolist_folder = os.path.join(data_folder, "audiolist")
 os.makedirs(audiolist_folder, exist_ok=True)
 
 # Split the text by sentences
-sentences = [sentence.strip() + "." for sentence in text_input.split('.') if sentence.strip()]
+sentences = [
+    sentence.strip() +
+    "." for sentence in text_input.split(".") if sentence.strip()]
 
 length_sen = len(sentences)
 
@@ -114,7 +120,11 @@ for i, sentence in enumerate(sentences):
     tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
     # tts = TTS("tts_models/multilingual/multi-dataset/bark").to(device)
     wav = tts.tts(text=sentence, speaker_wav=sample_input, language="en")
-    tts.tts_to_file(text=sentence, speaker_wav=sample_input, language="en", file_path=file_path)
+    tts.tts_to_file(
+        text=sentence,
+        speaker_wav=sample_input,
+        language="en",
+        file_path=file_path)
     print(f"Generated audio for sentence {i+1}/{length_sen}")
 
 # Combine audio files

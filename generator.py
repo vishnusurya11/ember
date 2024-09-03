@@ -8,6 +8,7 @@ import random
 from PIL import Image
 import io
 
+
 class ImageGenerator:
     def __init__(self, server_address, workflow_file):
         self.server_address = server_address
@@ -16,23 +17,31 @@ class ImageGenerator:
 
     def queue_prompt(self, prompt):
         p = {"prompt": prompt, "client_id": self.client_id}
-        data = json.dumps(p).encode('utf-8')
-        req = urllib.request.Request(f"http://{self.server_address}/prompt", data=data)
+        data = json.dumps(p).encode("utf-8")
+        req = urllib.request.Request(
+            f"http://{self.server_address}/prompt", data=data)
         with urllib.request.urlopen(req) as response:
             return json.loads(response.read())
 
     def get_image(self, filename, subfolder, folder_type):
-        data = {"filename": filename, "subfolder": subfolder, "type": folder_type}
+        data = {
+            "filename": filename,
+            "subfolder": subfolder,
+            "type": folder_type}
         url_values = urllib.parse.urlencode(data)
-        with urllib.request.urlopen(f"http://{self.server_address}/view?{url_values}") as response:
+        with urllib.request.urlopen(
+            f"http://{self.server_address}/view?{url_values}"
+        ) as response:
             return response.read()
 
     def get_history(self, prompt_id):
-        with urllib.request.urlopen(f"http://{self.server_address}/history/{prompt_id}") as response:
+        with urllib.request.urlopen(
+            f"http://{self.server_address}/history/{prompt_id}"
+        ) as response:
             return json.loads(response.read())
 
     def get_images(self, ws, prompt):
-        prompt_id = self.queue_prompt(prompt)['prompt_id']
+        prompt_id = self.queue_prompt(prompt)["prompt_id"]
         output_images = {}
         current_node = ""
 
@@ -40,15 +49,15 @@ class ImageGenerator:
             out = ws.recv()
             if isinstance(out, str):
                 message = json.loads(out)
-                if message['type'] == 'executing':
-                    data = message['data']
-                    if data['prompt_id'] == prompt_id:
-                        if data['node'] is None:
+                if message["type"] == "executing":
+                    data = message["data"]
+                    if data["prompt_id"] == prompt_id:
+                        if data["node"] is None:
                             break  # Execution is done
                         else:
-                            current_node = data['node']
+                            current_node = data["node"]
             else:
-                if current_node == 'save_image_websocket_node':
+                if current_node == "save_image_websocket_node":
                     images_output = output_images.get(current_node, [])
                     images_output.append(out[8:])
                     output_images[current_node] = images_output
@@ -64,7 +73,7 @@ class ImageGenerator:
             for image_data in image_datas:
                 image = Image.open(io.BytesIO(image_data))
                 now = datetime.datetime.now()
-                timestamp = now.strftime('%Y%m%d%H%M%S')
+                timestamp = now.strftime("%Y%m%d%H%M%S")
                 image.save(f"{save_dir}/{node_id}_{timestamp}.png")
 
     def update_prompt(self, prompt, updates):
@@ -94,6 +103,7 @@ class ImageGenerator:
         finally:
             ws.close()
 
+
 def main():
     # Configuration
     SERVER_ADDRESS = "127.0.0.1:8188"
@@ -101,21 +111,16 @@ def main():
     SAVE_DIR = "E:/ComfyUI_windows_portable/apiplay"
 
     generator = ImageGenerator(SERVER_ADDRESS, WORKFLOW_FILE)
-    
+
     # Example parameters for experimentation
     seed = random.randint(1, 1000000000)
     updates = {
-        "3": {
-            "seed": seed,
-            "steps": 40,
-            "cfg": 3.0
-        },
-        "59": {
-            "image": "E:/ComfyUI_windows_portable/apiplay/im4.png"
-        }
+        "3": {"seed": seed, "steps": 40, "cfg": 3.0},
+        "59": {"image": "E:/ComfyUI_windows_portable/apiplay/im4.png"},
     }
 
     generator.generate_images(SAVE_DIR, updates=updates)
+
 
 if __name__ == "__main__":
     main()
