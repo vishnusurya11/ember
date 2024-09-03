@@ -6,7 +6,6 @@ from langchain.schema.output_parser import StrOutputParser
 from datetime import datetime
 import json
 
-
 def generate_short_script(input_dict):
     # Load environment variables
     load_dotenv()
@@ -135,9 +134,12 @@ if __name__ == "__main__":
         "sentences": split_story_into_sentences(improved_story)
     }
     
-    # Generate the filename based on the current time
+    # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    filename = f"data/script_{timestamp}.json"
+    folder_name = f"data/{timestamp}"
+    os.makedirs(folder_name, exist_ok=True)
+    
+    filename = os.path.join(folder_name, f"script_{timestamp}.json")
 
     # Save the dictionary to a JSON file
     with open(filename, 'w') as f:
@@ -145,4 +147,3 @@ if __name__ == "__main__":
     
     # Print the location of the saved file
     print(f"\nStory saved to {filename}")
-
