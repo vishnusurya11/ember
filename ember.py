@@ -1,5 +1,6 @@
 from story_prompt import generate_short_script, improve_story, split_story_into_sentences  
 from audio_gen import generate_audio_from_json
+from prompt_generator import generate_prompts_for_sentences
 import json
 from datetime import datetime
 import os
@@ -43,8 +44,25 @@ if __name__ == "__main__":
     # Print the location of the saved file
     print(f"\nStory saved to {filename}")
     
+    # Generate prompts for the sentences
+    print("\nGenerating prompts for each sentence...")
+    sentences_with_prompts = generate_prompts_for_sentences(story_dict.get("sentences", {}))
+    story_dict["sentences"] = sentences_with_prompts
+
+    # Save the updated JSON file with prompts
+    with open(filename, 'w') as f:
+        json.dump(story_dict, f, indent=4)
+    
+    print(f"Updated JSON with prompts saved to {filename}")
+    
     # Call the audio generation function using the folder path
     input_mp3_path = 'sample_4.mp3'  # You can update this path if needed
     wav_path, mp3_path = generate_audio_from_json(folder_name, input_mp3=input_mp3_path)
     
+    # Update the JSON file with the audio output path
+    story_dict["audio_output"] = mp3_path
+    with open(filename, 'w') as f:
+        json.dump(story_dict, f, indent=4)
+    
     print(f"Generated audio files:\nWAV: {wav_path}\nMP3: {mp3_path}")
+    print(f"Final JSON with audio paths saved to {filename}")
