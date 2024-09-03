@@ -4,6 +4,7 @@ video/*
 output/*
 __pycache__/*
 tutorial-env/*
+data/*
 
 # files
 *.mp3
