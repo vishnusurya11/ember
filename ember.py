@@ -24,7 +24,7 @@ if __name__ == "__main__":
     load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = "E:\\Ember\\Ember\\ember\\data"
-
+    # TODO : base folder setup function to be added to all files 
     # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     folder_name = os.path.join(base_data_folder, timestamp)
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     print("\nGenerating final video...")
     video_output_folder = os.path.join(folder_name, "videos")
     final_video_output = os.path.join(folder_name, "final_story.mp4")
-    audio_folder = os.path.join(base_folder, "audiolist")
+    audio_folder = os.path.join(base_data_folder, "audiolist")
 
     generate_and_concatenate_videos_ffmpeg(
         audio_base_path=audio_folder,
