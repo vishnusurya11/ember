@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
-    input_dict = {"topic": "a 1900 story based on a any sherlock holmes story"}
+    input_dict = {"topic": "a thriller based on a American history"}
     # TODO - Update the input audio files folder and create a library to
     # choose from
     input_mp3_path = "sample_5.mp3"
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     print("\nGenerating final video...")
     video_output_folder = os.path.join(folder_name, "videos")
     final_video_output = os.path.join(folder_name, "final_story.mp4")
-    audio_folder = os.path.join(base_data_folder, "audiolist")
+    audio_folder = os.path.join(folder_name, "audiolist")
 
     generate_and_concatenate_videos_ffmpeg(
         audio_base_path=audio_folder,

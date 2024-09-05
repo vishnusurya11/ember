@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 
 
-def generate_audio_from_json(folder_path, input_mp3="sample_4.mp3"):
+def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
     # Initial setup
     sample_input = "sample_input.wav"
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -58,12 +58,12 @@ def generate_audio_from_json(folder_path, input_mp3="sample_4.mp3"):
         combined_audio += sentence_audio
 
     # Save the combined audio to the provided folder
-    final_path = os.path.join(folder_path, "final.wav")
+    final_path = os.path.join(folder_path, "final_audio.wav")
     combined_audio.export(final_path, format="wav")
     print(f"Combined audio saved to {final_path}")
 
     # Optionally, convert the final WAV file to MP3
-    final_mp3_path = os.path.join(folder_path, "final.mp3")
+    final_mp3_path = os.path.join(folder_path, "final_audio.mp3")
     combined_audio.export(final_mp3_path, format="mp3")
     print(f"Combined audio saved as MP3 to {final_mp3_path}")
 
@@ -79,7 +79,7 @@ def generate_audio_from_json(folder_path, input_mp3="sample_4.mp3"):
 if __name__ == "__main__":
     # Define the high-level folder path where the JSON file is located
     folder_path = "E:\\Ember\\Ember\\ember\\data\\20240902180118\\"
-    input_mp3_path = "sample_4.mp3"
+    input_mp3_path = "sample_5.mp3"
 
     # Call the function to generate audio from the JSON file
     wav_path, mp3_path = generate_audio_from_json(
