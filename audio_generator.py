@@ -19,7 +19,7 @@ def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
     # Find the JSON file in the given folder
     json_file_path = None
     for file_name in os.listdir(folder_path):
-        if file_name.endswith(".json"):
+        if file_name.startswith("codex") and file_name.endswith(".json"):
             json_file_path = os.path.join(folder_path, file_name)
             break
 
@@ -31,8 +31,8 @@ def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
         story_data = json.load(file)
 
     # Directory setup for audio list within the provided folder
-    audiolist_folder = os.path.join(folder_path, "audiolist")
-    os.makedirs(audiolist_folder, exist_ok=True)
+    verba_folder = os.path.join(folder_path, "verba")
+    os.makedirs(verba_folder, exist_ok=True)
 
     # Process each sentence and save audio files
     sentences = story_data.get("sentences", {})
@@ -43,7 +43,7 @@ def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
         if not sentence:
             continue  # Skip if the sentence is empty
 
-        file_path = os.path.join(audiolist_folder, f"{key}.wav")
+        file_path = os.path.join(verba_folder, f"{key}.wav")
         tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
         wav = tts.tts(text=sentence, speaker_wav=sample_input, language="en")
         tts.tts_to_file(
@@ -78,7 +78,7 @@ def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
 
 if __name__ == "__main__":
     # Define the high-level folder path where the JSON file is located
-    folder_path = "E:\\Ember\\Ember\\ember\\data\\20240902180118\\"
+    folder_path = r"E:\Ember\Ember\ember\data\20240904192910"
     input_mp3_path = "sample_5.mp3"
 
     # Call the function to generate audio from the JSON file

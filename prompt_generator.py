@@ -64,18 +64,18 @@ def generate_prompts_for_sentences(sentences):
 # Main logic
 if __name__ == "__main__":
     # High-level path provided
-    base_folder = r"E:\Ember\Ember\ember\data\20240902180118"
+    base_folder = r"E:\Ember\Ember\ember\data\20240904192910"
 
-    # Find the JSON file that starts with "script" in the provided directory
+    # Find the JSON file that starts with "codex" in the provided directory
     json_file = None
     for file in os.listdir(base_folder):
-        if file.startswith("script") and file.endswith(".json"):
+        if file.startswith("codex") and file.endswith(".json"):
             json_file = os.path.join(base_folder, file)
             break
 
     if not json_file:
         raise FileNotFoundError(
-            "No script JSON file found in the specified directory.")
+            "No codex JSON file found in the specified directory.")
 
     # Load the JSON file
     with open(json_file, "r", encoding="utf-8") as file:

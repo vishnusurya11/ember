@@ -15,6 +15,16 @@ from audio_generator import generate_audio_from_json
 from image_generator import generate_images_for_prompts, extract_timestamp_from_path
 from video_generator import generate_and_concatenate_videos_ffmpeg
 
+
+"""
+TODO :
+- change the `script` name to something else
+- Fix the prompts to be specific to the audio 
+- Improve the time execution by making the process dynamic
+"""
+
+
+
 if __name__ == "__main__":
     ##########################################################################
     ############################### 0 - Initial setup ########################
@@ -30,14 +40,14 @@ if __name__ == "__main__":
     folder_name = os.path.join(base_data_folder, timestamp)
     os.makedirs(folder_name, exist_ok=True)
 
-    filename = os.path.join(folder_name, f"script_{timestamp}.json")
+    filename = os.path.join(folder_name, f"codex_{timestamp}.json")
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
     input_dict = {"topic": "a thriller based on a American history"}
     # TODO - Update the input audio files folder and create a library to
     # choose from
-    input_mp3_path = "sample_5.mp3"
+    input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
     ##########################################################################
     ############################### 1 - Story Generator ######################
     ##########################################################################

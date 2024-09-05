@@ -126,18 +126,18 @@ def generate_and_concatenate_videos_ffmpeg(
 
 
 if __name__ == "__main__":
-    base_folder = r"E:\Ember\Ember\ember\data\20240903190819"
+    base_folder = r"E:\Ember\Ember\ember\data\20240904192910"
 
     # Load the story config to get the images_output_folder
     json_file = os.path.join(
-        base_folder, f"script_{os.path.basename(base_folder)}.json"
+        base_folder, f"codex_{os.path.basename(base_folder)}.json"
     )
     with open(json_file, "r", encoding="utf-8") as file:
         story_data = json.load(file)
 
     images_output_folder = story_data.get("images_output")
-    audio_folder = os.path.join(base_folder, "audiolist")
-    video_output_folder = os.path.join(base_folder, "videos")
+    audio_folder = os.path.join(base_folder, "verba")
+    video_output_folder = os.path.join(base_folder, "Visix")
     final_video_output = os.path.join(base_folder, "final_story.mp4")
 
     if not images_output_folder:

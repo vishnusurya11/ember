@@ -142,7 +142,7 @@ if __name__ == "__main__":
     folder_name = f"data/{timestamp}"
     os.makedirs(folder_name, exist_ok=True)
 
-    filename = os.path.join(folder_name, f"script_{timestamp}.json")
+    filename = os.path.join(folder_name, f"codex_{timestamp}.json")
 
     # Save the dictionary to a JSON file
     with open(filename, "w") as f:
