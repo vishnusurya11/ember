@@ -151,7 +151,7 @@ if __name__ == "__main__":
         story_data.get("sentences", {}),
         video_output_folder,
         final_video_output,
-        target_resolution="1080x1920",
+        target_resolution="1920x1080", #target_resolution="1080x1920",
         zoom_out=True,
     )
 

@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
-    input_dict = {"topic": "a heist story in space based on real human history"}
+    input_dict = {"topic": "a friendship story in cyberpunk based on real human history"}
     # TODO - Update the input audio files folder and create a library to
     # choose from
     input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
@@ -169,7 +169,7 @@ if __name__ == "__main__":
         sentences=story_dict.get("sentences", {}),
         output_folder=video_output_folder,
         final_output_path=final_video_output,
-        target_resolution="1080x1920",  # 9:16 aspect ratio
+        target_resolution="1920x1080",  # 9:16 aspect ratio
         zoom_out=False,  # No zoom effect for now
     )
 
