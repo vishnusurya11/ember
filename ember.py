@@ -159,9 +159,9 @@ if __name__ == "__main__":
     video_start_time = time.time()
     # Generate the final video
     print("\nGenerating final video...")
-    video_output_folder = os.path.join(folder_name, "videos")
+    video_output_folder = os.path.join(folder_name, "visix")
     final_video_output = os.path.join(folder_name, "final_story.mp4")
-    audio_folder = os.path.join(folder_name, "audiolist")
+    audio_folder = os.path.join(folder_name, "verba")
 
     generate_and_concatenate_videos_ffmpeg(
         audio_base_path=audio_folder,

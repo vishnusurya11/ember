@@ -137,7 +137,7 @@ if __name__ == "__main__":
 
     images_output_folder = story_data.get("images_output")
     audio_folder = os.path.join(base_folder, "verba")
-    video_output_folder = os.path.join(base_folder, "Visix")
+    video_output_folder = os.path.join(base_folder, "visix")
     final_video_output = os.path.join(base_folder, "final_story.mp4")
 
     if not images_output_folder:
