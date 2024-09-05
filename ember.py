@@ -18,9 +18,9 @@ from video_generator import generate_and_concatenate_videos_ffmpeg
 
 """
 TODO :
-- change the `script` name to something else
 - Fix the prompts to be specific to the audio 
-- Improve the time execution by making the process dynamic
+- change the image format
+- add a constants file
 """
 
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
-    input_dict = {"topic": "a thriller based on a American history"}
+    input_dict = {"topic": "a heist story in space based on real human history"}
     # TODO - Update the input audio files folder and create a library to
     # choose from
     input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
@@ -99,26 +99,7 @@ if __name__ == "__main__":
     total_prompt_time = prompt_end_time - prompt_start_time
 
     ##########################################################################
-    ############################### 3 - Audio Generator ######################
-    ##########################################################################
-    audio_start_time = time.time()
-    # Call the audio generation function using the folder path
-
-    wav_path, mp3_path = generate_audio_from_json(
-        folder_name, input_mp3=input_mp3_path)
-
-    # Update the JSON file with the audio output path
-    story_dict["audio_output"] = mp3_path
-    with open(filename, "w") as f:
-        json.dump(story_dict, f, indent=4)
-
-    print(f"Generated audio files:\nWAV: {wav_path}\nMP3: {mp3_path}")
-
-    audio_end_time = time.time()
-    total_audio_time = audio_end_time - audio_start_time
-
-    ##########################################################################
-    ############################### 4 - Image Generator ######################
+    ############################### 3 - Image Generator ######################
     ##########################################################################
 
     image_start_time = time.time()
@@ -152,6 +133,25 @@ if __name__ == "__main__":
 
     image_end_time = time.time()
     total_image_time = image_end_time - image_start_time
+
+    ##########################################################################
+    ############################### 4 - Audio Generator ######################
+    ##########################################################################
+    audio_start_time = time.time()
+    # Call the audio generation function using the folder path
+
+    wav_path, mp3_path = generate_audio_from_json(
+        folder_name, input_mp3=input_mp3_path)
+
+    # Update the JSON file with the audio output path
+    story_dict["audio_output"] = mp3_path
+    with open(filename, "w") as f:
+        json.dump(story_dict, f, indent=4)
+
+    print(f"Generated audio files:\nWAV: {wav_path}\nMP3: {mp3_path}")
+
+    audio_end_time = time.time()
+    total_audio_time = audio_end_time - audio_start_time
 
     ##########################################################################
     ############################### 5 - Video Generator ######################
