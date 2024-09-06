@@ -13,7 +13,7 @@ from story_generator import (
 from prompt_generator import generate_prompts_for_sentences
 from audio_generator import generate_audio_from_json
 from image_generator import generate_images_for_prompts, extract_timestamp_from_path
-from video_generator import generate_and_concatenate_videos_ffmpeg
+from video_generator import generate_and_concatenate_videos
 
 
 """
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
-    input_dict = {"topic": "a friendship story in cyberpunk based on real human history"}
+    input_dict = {"topic": "A heist story in medieval times inspired from oceans 11"}
     # TODO - Update the input audio files folder and create a library to
     # choose from
     input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
@@ -163,15 +163,26 @@ if __name__ == "__main__":
     final_video_output = os.path.join(folder_name, "final_story.mp4")
     audio_folder = os.path.join(folder_name, "verba")
 
-    generate_and_concatenate_videos_ffmpeg(
+    # generate_and_concatenate_videos_ffmpeg(
+    #     audio_base_path=audio_folder,
+    #     images_base_path=final_image_folder,
+    #     sentences=story_dict.get("sentences", {}),
+    #     output_folder=video_output_folder,
+    #     final_output_path=final_video_output,
+    #     target_resolution="1920x1080",  # 9:16 aspect ratio
+    #     zoom_out=False,  # No zoom effect for now
+    # )
+
+    generate_and_concatenate_videos(
         audio_base_path=audio_folder,
         images_base_path=final_image_folder,
         sentences=story_dict.get("sentences", {}),
         output_folder=video_output_folder,
         final_output_path=final_video_output,
-        target_resolution="1920x1080",  # 9:16 aspect ratio
-        zoom_out=False,  # No zoom effect for now
+        target_resolution=(1920, 1080),
+        effect_type=None  # Set to None for random selection, or specify 'zoom_in', 'zoom_out', or 'pan'
     )
+
 
     # Update the JSON with the video output path
     story_dict["video_output"] = final_video_output
