@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
-    input_dict = {"topic": "A heist story in medieval times inspired from oceans 11"}
+    input_dict = {"topic": "'The Golem's Guardian': In medieval Prague, a rabbi creates a golem to protect the Jewish community, but struggles with the moral implications of controlling such a powerful creature."}
     # TODO - Update the input audio files folder and create a library to
     # choose from
     input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
     sentences_with_prompts = generate_prompts_for_sentences(
-        story_dict.get("sentences", {})
+        story_dict.get("sentences", {}),story_dict.get("story", {})
     )
     story_dict["sentences"] = sentences_with_prompts
 
