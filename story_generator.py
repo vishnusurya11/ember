@@ -105,21 +105,51 @@ def improve_story(story, iterations=1):
 
     return improved_story
 
+def generate_youtube_title_description(story):
+    # Create a ChatOpenAI model
+    model = ChatOpenAI(model="gpt-4o-mini")
 
-def split_story_into_sentences(story):
-    # Split the story into sentences using '.'
-    sentences = [sentence.strip()
-                 for sentence in story.split(".") if sentence.strip()]
+    # Define the prompt to generate the YouTube title and description
+    title_prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", 
+            "You are an expert in creating concise, captivating YouTube titles that reflect the core essence of a story. \
+            Your task is to generate only the YouTube title, no additional text or special characters, ensuring it is engaging, short, and to the point. \
+            Do not use quotation marks or any unnecessary punctuation in the title."),
+            ("human", 
+            f"Generate a compelling YouTube title for the following story:\n\n{story}"),
+        ]
+    )
 
-    # Create a dictionary to store sentences with incremental keys
-    sentences_dict = {}
 
-    for i, sentence in enumerate(sentences, start=1):
-        # Incremental key with leading zeros (e.g., 001, 002, etc.)
-        key = f"{i:03}"
-        sentences_dict[key] = {"sentence": sentence}
+    description_prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", 
+         "You are an expert in creating captivating YouTube descriptions that reflect the core essence of a story. \
+         Your task is to generate only the YouTube description, which should be engaging and informative, summarizing the key elements of the story to entice viewers to watch. \
+         Keep it concise, avoid spoilers, and ensure it highlights the main themes and intrigue."),
+        ("human", 
+         f"Generate a compelling YouTube description for the following story:\n\n{story}"),
+    ]
+)
 
-    return sentences_dict
+
+    # Process the story using the model
+    title_result = title_prompt | model | StrOutputParser()
+    title_response = title_result.invoke({"input_dict": {"story": story}})
+
+    description_result = description_prompt | model | StrOutputParser()
+    description_response = description_result.invoke({"input_dict": {"story": story}})
+
+    # Split the response into title and description (assuming the response is well-structured)
+    # lines = response.split("\n")
+    # title = lines[0].strip()  # First line as the title
+    # description = " ".join(line.strip() for line in lines[1:]).strip()  # Rest as the description
+
+    return {
+        "youtube_title": title_response,
+        "youtube_description": description_response
+    }
 
 
 if __name__ == "__main__":
@@ -131,10 +161,12 @@ if __name__ == "__main__":
     # Improve the generated story twice
     improved_story = improve_story(story, iterations=iteration_needed)
     print(improved_story)
+    youtube_details = generate_youtube_title_description(improved_story)
+
     # Create the final dictionary to save
     story_dict = {
         "story": improved_story,
-        "sentences": split_story_into_sentences(improved_story),
+        "youtube_details" : youtube_details,
     }
 
     # Generate the filename and folder based on the current time

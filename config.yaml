@@ -1,0 +1,10 @@
+# EMBER Config
+
+base_folder: "E:/Ember/Ember/ember"
+base_example_folder: "E:/Ember/Ember/ember/data/20240904192910"
+
+# General story settings
+story:
+  title: "The Alchemist's Apprentice"
+  setting: "14th century England"
+  theme: "Coming of age, mystery, science vs. magic"

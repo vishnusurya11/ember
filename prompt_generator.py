@@ -60,6 +60,20 @@ def generate_prompts_for_sentences(sentences, story):
 
     return sentences
 
+def split_story_into_sentences(story):
+    # Split the story into sentences using '.'
+    sentences = [sentence.strip()
+                 for sentence in story.split(".") if sentence.strip()]
+
+    # Create a dictionary to store sentences with incremental keys
+    sentences_dict = {}
+
+    for i, sentence in enumerate(sentences, start=1):
+        # Incremental key with leading zeros (e.g., 001, 002, etc.)
+        key = f"{i:03}"
+        sentences_dict[key] = {"sentence": sentence}
+
+    return sentences_dict
 
 # Main logic
 if __name__ == "__main__":
@@ -80,7 +94,7 @@ if __name__ == "__main__":
     # Load the JSON file
     with open(json_file, "r", encoding="utf-8") as file:
         story_data = json.load(file)
-
+    story_data["sentences"]= split_story_into_sentences(story_data.get("story", {}))
     # Generate prompts for the sentences
     sentences_with_prompts = generate_prompts_for_sentences(
         story_data.get("sentences", {}), story_data.get("story", {})

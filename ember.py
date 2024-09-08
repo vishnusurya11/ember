@@ -3,14 +3,14 @@ from datetime import datetime
 import os
 import time
 from dotenv import load_dotenv
-
+from utils.config_helper import load_config
 
 from story_generator import (
     generate_short_script,
     improve_story,
-    split_story_into_sentences,
+    generate_youtube_title_description,
 )
-from prompt_generator import generate_prompts_for_sentences
+from prompt_generator import generate_prompts_for_sentences,split_story_into_sentences
 from audio_generator import generate_audio_from_json
 from image_generator import generate_images_for_prompts, extract_timestamp_from_path
 from video_generator import generate_and_concatenate_videos
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
-    input_dict = {"topic": "'The Golem's Guardian': In medieval Prague, a rabbi creates a golem to protect the Jewish community, but struggles with the moral implications of controlling such a powerful creature."}
+    input_dict = {"topic": "'The Hereditary Hack': A second-generation cybercriminal discovers her legendary parents' last heist is still running in the background of the internet. What world-changing secret is lurking in the code, and why did they hide it from her?"}
     # TODO - Update the input audio files folder and create a library to
     # choose from
     input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
@@ -62,11 +62,11 @@ if __name__ == "__main__":
     print("\nImproving the story...")
     improved_story = improve_story(story, iterations=iterations)
     print(improved_story)
-
+    youtube_details = generate_youtube_title_description(improved_story)
     # Create the final dictionary to save
     story_dict = {
         "story": improved_story,
-        "sentences": split_story_into_sentences(improved_story),
+        "youtube_details" : youtube_details,
     }
 
     # Save the dictionary to a JSON file
@@ -84,6 +84,7 @@ if __name__ == "__main__":
     prompt_start_time = time.time()
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
+    story_data["sentences"]= split_story_into_sentences(story_data.get("story", {}))
     sentences_with_prompts = generate_prompts_for_sentences(
         story_dict.get("sentences", {}),story_dict.get("story", {})
     )
@@ -117,6 +118,7 @@ if __name__ == "__main__":
         SAVE_DIR,
         story_dict.get("sentences", {}),
         timestamp,
+        3
     )
 
     # Define the final image output path
@@ -163,15 +165,6 @@ if __name__ == "__main__":
     final_video_output = os.path.join(folder_name, "final_story.mp4")
     audio_folder = os.path.join(folder_name, "verba")
 
-    # generate_and_concatenate_videos_ffmpeg(
-    #     audio_base_path=audio_folder,
-    #     images_base_path=final_image_folder,
-    #     sentences=story_dict.get("sentences", {}),
-    #     output_folder=video_output_folder,
-    #     final_output_path=final_video_output,
-    #     target_resolution="1920x1080",  # 9:16 aspect ratio
-    #     zoom_out=False,  # No zoom effect for now
-    # )
 
     generate_and_concatenate_videos(
         audio_base_path=audio_folder,
