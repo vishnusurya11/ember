@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate, FewShotChatMessagePromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from datetime import datetime
@@ -12,7 +13,8 @@ def generate_short_script(input_dict):
     load_dotenv()
 
     # Create a ChatOpenAI model
-    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatOpenAI(model="gpt-4o-mini")
+    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Create the few-shot prompt template
     example_prompt = ChatPromptTemplate.from_messages(
@@ -57,7 +59,8 @@ def generate_short_script(input_dict):
 
 def improve_story(story, iterations=1):
     # Create a ChatOpenAI model
-    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatOpenAI(model="gpt-4o-mini")
+    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Create the few-shot prompt template
     example_prompt = ChatPromptTemplate.from_messages(
@@ -107,7 +110,8 @@ def improve_story(story, iterations=1):
 
 def generate_youtube_title_description(story):
     # Create a ChatOpenAI model
-    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatOpenAI(model="gpt-4o-mini")
+    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Define the prompt to generate the YouTube title and description
     title_prompt = ChatPromptTemplate.from_messages(
@@ -155,9 +159,9 @@ def generate_youtube_title_description(story):
 if __name__ == "__main__":
     # Initial story generation
     iteration_needed = 2
-    input_dict = {"topic": "A heroic journey in a dystopian future"}
+    input_dict = {"topic": "'The Hereditary Hack': A second-generation cybercriminal discovers her legendary parents' last heist is still running in the background of the internet. What world-changing secret is lurking in the code, and why did they hide it from her?"}
     story = generate_short_script(input_dict)
-
+    print(f"story --> {story}")
     # Improve the generated story twice
     improved_story = improve_story(story, iterations=iteration_needed)
     print(improved_story)

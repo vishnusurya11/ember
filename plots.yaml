@@ -1,0 +1,525 @@
+unused_plots:
+  1: '''The Mnemonic Plague'': A virus begins erasing humanity''s collective memory.
+    As society crumbles, a group of ''memory keepers'' must preserve crucial knowledge
+    by passing stories through a new oral tradition, fighting both the disease and
+    those who see the memory wipe as a chance to rewrite history.'
+  2: '''The Quantum Quixote'': Don Quixote is pulled into the 21st century by a quantum
+    experiment gone awry. As he tilts at wind turbines and battles self-driving cars,
+    a Spanish literature professor must convince the world that the delusional knight
+    is real while grappling with his own sanity.'
+  3: '''The Chronos Casinos'': Underground time-travel casinos let high-rollers bet
+    on historical events. When a down-on-his-luck gambler stumbles upon a plot to
+    rig both past and future, he must pull off the ultimate heist across multiple
+    timelines to expose the truth and prevent temporal collapse.'
+  4: "'The Babel Babel': A massive tower scraping the edge of space is built to house\
+    \ the world's displaced. As it grows, separated languages and cultures evolve\
+    \ on different levels. A young translator must navigate this vertical babel of\
+    \ cultures to prevent a conflict that could topple civilization\xE2\u20AC\u201D\
+    literally."
+  5: '''The Nostradamus Algorithm'': An AI designed to predict the future becomes
+    eerily accurate, but each prediction it makes seems to pull catastrophes into
+    reality. As humanity grapples with whether to shut it down or let it dictate policy,
+    a programmer races to find the bug before the ultimate prediction comes true.'
+  6: '''The Pandora Stream'': A new streaming service offers ''what if'' scenarios
+    of your life, showing paths not taken. When people become addicted to living their
+    alternate realities, a therapist specializing in ''stream addiction'' uncovers
+    a dark truth: the service is stealing possibilities from its users'' real lives.'
+  7: "'The Antiquarians' War': Rival time-traveling collectors battle across history\
+    \ to acquire artifacts for wealthy patrons. When a rare item threatens to unravel\
+    \ the timeline, enemies must work together to save history\xE2\u20AC\u201Dand\
+    \ their profitable business model."
+  8: '''The Cybernetic Seminole'': In a flooded future Florida, a descendant of the
+    Seminole tribe fuses ancient traditions with scavenged technology to survive.
+    When she discovers her amalgamation of old and new might be the key to reversing
+    climate change, she must defend her innovations from those who would exploit them.'
+  9: "'The Heisenberg Heist': In a world where quantum uncertainty governs everyday\
+    \ life, a master thief plans an impossible museum heist. The prize: Schr\xC3\xB6\
+    dinger's diamond, an artifact that exists in multiple states and locations simultaneously.\
+    \ The catch: observation changes everything, and rival gangs are watching."
+  10: "'The Memento Mori Virus': A bioweapon forces those infected to experience their\
+    \ own deaths daily in vivid hallucinations. As society splits between the 'death-knowers'\
+    \ and the uninfected, a immunologist racing for a cure begins to wonder if the\
+    \ virus is a curse\xE2\u20AC\u201Dor an evolutionary leap."
+  11: '''The Mnemonic Plague'': A virus erases humanity''s collective memory. As society
+    crumbles, ''memory keepers'' must preserve crucial knowledge through a new oral
+    tradition, fighting both the disease and those who see the memory wipe as a chance
+    to rewrite history.'
+  12: '''The Quantum Quixote'': Don Quixote is pulled into the 21st century by a quantum
+    experiment. As he tilts at wind turbines and battles self-driving cars, a Spanish
+    literature professor must prove the knight''s existence while questioning his
+    own sanity.'
+  13: '''The Chronos Casinos'': Time-travel casinos let high-rollers bet on historical
+    events. A down-on-his-luck gambler uncovers a plot to rig both past and future,
+    forcing him to pull off the ultimate cross-timeline heist.'
+  14: "'The Babel Babel': A space-scraping tower houses the world's displaced. As\
+    \ separated languages evolve on different levels, a young translator must prevent\
+    \ a conflict that could topple civilization\xE2\u20AC\u201Dliterally."
+  15: '''The Nostradamus Algorithm'': An AI predicting the future becomes eerily accurate,
+    but each prediction seems to cause catastrophes. A programmer races to find the
+    bug before the ultimate prediction comes true.'
+  16: '''The Pandora Stream'': A streaming service shows ''what if'' scenarios of
+    users'' lives. As people become addicted to alternate realities, a therapist discovers
+    the service is stealing possibilities from real lives.'
+  17: "'The Antiquarians' War': Time-traveling collectors battle across history for\
+    \ wealthy patrons. When a rare item threatens to unravel time, enemies must cooperate\
+    \ to save history\xE2\u20AC\u201Dand their business."
+  18: '''The Cybernetic Seminole'': In a flooded future Florida, a Seminole descendant
+    fuses ancient traditions with scavenged tech. Her innovations might reverse climate
+    change, but she must defend them from exploiters.'
+  19: "'The Heisenberg Heist': In a quantum-uncertain world, a thief plans to steal\
+    \ Schr\xC3\xB6dinger's diamond, existing in multiple states. The catch: observation\
+    \ changes everything, and rival gangs are watching."
+  20: "'The Memento Mori Virus': A bioweapon forces the infected to experience their\
+    \ deaths daily. As society splits between 'death-knowers' and the uninfected,\
+    \ a immunologist questions if it's a curse\xE2\u20AC\u201Dor evolution."
+  21: '''The Akashic Hackers'': Cyber-mystics hack the universe''s source code, the
+    Akashic Records. As reality glitches around them, they race against corporations
+    wanting to monetize existence itself.'
+  22: '''The Karma Brokers'': In a world where karma is quantifiable, underground
+    traders manipulate fate. A karmic auditor uncovers a scheme that could unbalance
+    the cosmic scales forever.'
+  23: '''The Prometheus Frequency'': A radio signal awakens humanity''s dormant ability
+    to control fire with their minds. As the world burns, a firefighter with immunity
+    to the signal tries to find its source.'
+  24: '''The Ontological Anchor'': Reality begins to unravel when the one human whose
+    observation keeps the universe stable falls into a coma. A team of physicists
+    and philosophers race to wake them.'
+  25: '''The DejaVu Epidemic'': People start living the same day repeatedly, but each
+    is trapped in a different day. A temporal epidemiologist searches for patient
+    zero to stop the time-loop outbreak.'
+  26: '''The Synesthesia Syndrome'': A new drug unlocks synesthesia in users, but
+    overuse starts blending senses permanently. A detective who tastes colors must
+    solve a murder where the only clues are sensory.'
+  27: '''The Ancestral Download'': A tech company offers to download ancestors'' memories
+    into clients'' minds. When forgotten generational trauma and skills surface, society
+    transforms unpredictably.'
+  28: '''The Quantum Qi'': Scientists prove qi is manipulation of quantum fields.
+    As ancient martial arts become devastatingly effective, a former physicist must
+    revive a long-lost technique to prevent qi-powered wars.'
+  29: '''The Metaphor Plague'': A linguistic virus makes people unable to understand
+    literal speech. A poet and a scientist team up to find a cure before global communication
+    breaks down.'
+  30: '''The Oneiric Infiltrators'': Dream-diving agents enter sleep to extract corporate
+    secrets. When one discovers a plot to control the world through shared dreams,
+    she must out-dream the masterminds.'
+  31: '''The Gravity Thieves'': Criminals steal gravity from localized areas, selling
+    it as an energy source. A weightless police officer must adapt to catch them before
+    Earth''s orbit is affected.'
+  32: '''The Embodied Internet'': A new technology transforms the internet into a
+    physical realm. A digital archaeologist becomes trapped in ancient abandoned websites,
+    searching for a way back to reality.'
+  33: '''The Perception Filters'': Augmented Reality filters begin altering real-world
+    perceptions. As society fragments into bespoke realities, a cultural anthropologist
+    searches for objective truth.'
+  34: '''The Emotional Contagion'': Empaths can spread and manipulate emotions like
+    viruses. During a pandemic of despair, an emotional epidemiologist must find patient
+    zero: the world''s most depressed person.'
+  35: '''The Quantum Pharaohs'': Egyptologists discover the pyramids are quantum computers
+    preserving pharaohs'' consciousness. As modern leaders upload their minds, an
+    archaeologist races to unlock the ancient fail-safe.'
+  36: '''The Morphic Resonance Effect'': The theory of morphic resonance is proven,
+    and the past becomes mutable through collective belief. Warring factions attempt
+    to reshape history in their image.'
+  37: '''The Jungian Shadows'': A Jungian spiritualist accidentally makes the collective
+    unconscious shadow manifest in reality. As humanity''s repressed darkness runs
+    rampant, she scrambles to integrate the shadow before ego-death.'
+  38: '''The Ideasthesia Revolution'': People develop the ability to experience ideas
+    as sensations. As abstract thinking becomes overwhelming, a neurodivergent individual
+    who has always perceived the world this way becomes humanity''s reluctant guide.'
+  39: '''The Quantum Entangled'': Lovers become quantum entangled, their fates inextricably
+    linked across any distance. A scientist races to disentangle her partner from
+    a doppelganger before their competing wave functions collapse.'
+  40: '''The Archetypal Uprising'': Jungian archetypes gain sentience, breaking free
+    from the collective unconscious to possess individuals. A psychologist must heal
+    the fractured psyche of humanity by integrating the archetypes into a new pantheon.'
+  41: '''The Multiverse Refugees'': Refugees from dying parallel Earths seek asylum
+    in our reality. As alternative versions of the same people meet, a multiverse
+    immigration officer tries to prevent paradoxes and cultural clashes.'
+  42: '''The Chronological Cancer'': A temporal illness causes people to age backwards,
+    retain memories, but revert to past selves. A scientist races against reverse-time
+    to find a cure before she forgets she''s working on one.'
+  43: '''The Astral Internet'': The internet evolves into an astral plane where users''
+    souls go online. A digital shaman navigates this new spirit world, battling demons
+    both literal and figurative.'
+  44: '''The Quantum Oni'': Japanese demons, or oni, are discovered to be quantum
+    phenomena, appearing when observed with fear. A Shinto priest and quantum physicist
+    team up to calm the nation''s collective fear before the oni overrun reality.'
+  45: '''The Memetic Magic'': Internet memes are found to have reality-warping properties
+    based on viral spread. Meme lords become modern sorcerers, and a disillusioned
+    blogger finds herself the reluctant chosen one of an ancient prophecy.'
+  46: '''The Holographic Homunculi'': Scientists create miniature holographic humans
+    for computational purposes. When the holograms develop sentience and demand rights,
+    a human rights lawyer must argue for the personhood of artificial beings.'
+  47: '''The Cryptid Codex'': A cryptozoologist discovers a codex that brings imaginary
+    animals to life when read aloud. As mythical beasts run rampant, she must find
+    a way to close the book without destroying the wondrous creatures she''s longed
+    to see.'
+  48: '''The Neuro-Linguistic Ninjas'': Martial artists develop techniques to reprogram
+    minds through perfectly constructed sentences. As language becomes a weapon, a
+    stuttering linguist may be the world''s only hope for peace.'
+  49: '''The Quantum Quetzalcoatl'': The Aztec god Quetzalcoatl returns, revealed
+    to be a transdimensional being. As it demands sacrifice for interdimensional travel
+    technology, a Mexican archaeologist must decipher whether to embrace or banish
+    the deity.'
+  50: '''The Psychogeography Effect'': The layout of cities begins to shape reality
+    itself. Urban planners become reality warpers, and a rogue architect must redesign
+    existence before a totalitarian regime cementes their power in the fabric of space-time.'
+  51: '''The Retrocausal Rebellion'': Future revolutionaries send messages to the
+    past, turning history into a battleground of temporal propaganda. A historian
+    must unravel the truth as past and future rewrite each other in real-time.'
+  52: "'The Quantum Quincea\xC3\xB1era': A girl's quincea\xC3\xB1era celebration coincides\
+    \ with a quantum event, splitting her into 15 alternate selves. As each ventures\
+    \ into a different possible future, they must reunite to prevent a pan-dimensional\
+    \ catastrophe."
+  53: '''The Synaptic Steamers'': In a steampunk world, telepaths power difference
+    engines with their minds. When a hidden mind-virus begins turning them into human
+    computers, a low-level thought-stoker must rise up to save both the telepaths
+    and the steam-powered internet.'
+  54: '''The Metafictional Metropolis'': A writer''s fictional city begins to manifest
+    in reality, overwriting an existing metropolis. The author must journey through
+    their own creation to find the ending before the story consumes the world.'
+  55: '''The Euclidean Embargo'': Extra-dimensional beings place an embargo on three-dimensional
+    space-time. A team of theoretical physicists and contraband smugglers must break
+    the blockade to keep our reality from collapsing.'
+  56: '''The Parametric Possession'': Building parameters in architectural software
+    begin allowing ghosts to possess structures. An exorcist and a coder team up to
+    debug the haunted housing market before the dead outnumber the living.'
+  57: '''The Onomatopoeic Outbreak'': Words begin to invoke the sound or action they
+    describe. As reality becomes a minefield of accidental summoning, a linguistics
+    professor searches for the magic word to set things right.'
+  58: '''The Hyperbolic Time Chamber'': A physics experiment creates a zone where
+    time passes exponentially faster. As people use it to extend their lives and rush
+    innovation, the aging of the universe itself begins to accelerate.'
+  59: '''The Gestalt Gestationists'': A cult believes they can birth a god through
+    the sheer power of collective will. As their belief begins warping reality, a
+    cultural anthropologist must infiltrate their ranks to prevent a divine apocalypse.'
+  60: '''The Quantum Qareen'': Islamic lore of the qareen (personal djinn) is proven
+    true, but they''re quantum beings simultaneously good and evil. A Sufi mystic
+    grapples with the endless moral quandaries of every decision as the world''s population
+    reckons with their quantum conscience.'
+  61: '''The Cybernetic Shangri-La'': A hidden valley ruled by benevolent AI is discovered
+    in the Himalayas. As the world''s superpowers vie for control, a disillusioned
+    programmer must determine if this digital utopia is humanity''s salvation or an
+    insidious form of control.'
+  62: '''The Topological Totems'': Sacred geometry is found to have reality-warping
+    properties. As mathematicians become the new high priests, a topologist races
+    to reshape the universe before an authoritarian regime can lock reality into their
+    desired form.'
+  63: '''The Pareidolia Pandemic'': A memetic virus causes mass pareidolia, making
+    people see significant patterns in random data. As society teeters between profound
+    insight and madness, a neurologist searches for the cure while doubting her own
+    perceptions.'
+  64: '''The Fractal Phantasms'': Beings from higher fractal dimensions begin to manifest
+    in our reality. A chaos mathematician must find a way to communicate with these
+    infinitely complex entities before their presence shatters our understanding of
+    existence.'
+  65: '''The Quantum Quipu'': An ancient Incan quipu is discovered to be a quantum
+    computer capable of calculating parallel histories. As nations fight for control
+    of the artifact, an archaeologist and a physicist race to unlock its secrets and
+    prevent a war that could split the timeline.'
+  66: '''The Hyper-Empaths'': A new era of human evolution produces individuals capable
+    of feeling the emotions of everyone on the planet simultaneously. As these hyper-empaths
+    struggle with the weight of global consciousness, one must find a way to unite
+    humanity''s emotional landscape to prevent mass insanity.'
+  67: '''The Meme Shamans'': Internet meme culture evolves into a new form of magic,
+    with viral content shaping reality. A disillusioned social media manager discovers
+    she''s the chosen one of this new digital pantheon and must master meme magic
+    to prevent an apocalyptic ''trend''.'
+  68: '''The Quantum Quixote'': Don Quixote is pulled through time by a quantum experiment,
+    seeing modern technology as magic and monsters. A literature professor must help
+    the knight navigate the 21st century while protecting him from those who would
+    exploit his anachronistic worldview.'
+  69: '''The Chronosomniac Clinic'': A sleep disorder causes people to involuntarily
+    time travel while dreaming. A ''dream detective'' who can enter others'' dreams
+    must solve a murder that occurs across multiple time periods and states of consciousness.'
+  70: '''The Metacognition Metastasis'': A new meditation technique allows people
+    to enter their own minds as a physical space. When practitioners become trapped
+    in mental labyrinths of their own making, a psychonaut must journey through the
+    collective unconscious to lead them out.'
+  71: "'The Quantum Qur\xCA\xBCan': Scientists discover that reciting the Qur\xCA\xBC\
+    an produces measurable quantum effects. As the world grapples with this merging\
+    \ of science and faith, a Muslim physicist must prevent zealots from using this\
+    \ knowledge to force a global religious conversion."
+  72: '''The Nanotechnology Necromancers'': Nano-machines gain the ability to reanimate
+    the dead by rebuilding and powering inert cells. As the line between life and
+    death blurs, a mortician becomes an unlikely advocate for the rights of the ''neo-living''.'
+  73: '''The Akashic Architects'': A secret society discovers how to access and edit
+    the universe''s source code. A rogue member goes on a reality-bending spree, and
+    the group must navigate an ever-changing world to stop him before he rewrites
+    existence itself.'
+  74: '''The Quantum Quilt'': An Amish community''s quilts are found to be complex
+    quantum computers, calculating probabilities of future events. As the world seeks
+    to exploit this discovery, the community''s elder must decide whether to share
+    their secret knowledge or protect their way of life.'
+  75: '''The Memetic Monks'': Tibetan monks develop a form of meditation that can
+    implant thoughts into the minds of others. As this technique goes viral, a cognitive
+    scientist must find a way to protect free will in an increasingly telepathic world.'
+  76: '''The Holographic Homunculus'': A cutting-edge virtual reality system allows
+    users to shrink down and explore their own bodies from the inside. When people
+    become addicted to living inside themselves, a VR psychologist must journey into
+    the bodies and minds of her patients to bring them back to reality.'
+  77: '''The Quantum Quetzalcoatl'': The return of the Aztec god Quetzalcoatl is linked
+    to fluctuations in the quantum field. An archaeologist and a physicist team up
+    to decipher ancient prophecies and modern physics, racing to prevent a convergence
+    that could reshape reality.'
+  78: '''The Parallel Pandemic'': A virus begins infecting people across multiple
+    parallel universes simultaneously. A epidemiologist must track the disease through
+    alternate realities, working with her parallel selves to find a cure before it
+    collapses the multiverse.'
+  79: '''The Chrono-Cartographers'': Mapmakers discover that accurately mapping an
+    area allows them to manipulate its time flow. As warring factions use this power
+    to create temporal strongholds, a pacifist cartographer seeks a way to chart a
+    course to peace.'
+  80: '''The Ontological Organ Donors'': Philosopher-surgeons perfect a technique
+    to transplant metaphysical qualities like conscience, willpower, or imagination.
+    When the wealthy begin harvesting these traits from the poor, an underground resistance
+    fights to preserve the essence of humanity.'
+  81: '''The Quantum Griots'': West African storytellers discover their tales can
+    alter quantum probabilities. As reality becomes increasingly unstable, a reluctant
+    young griot must master the art of quantum storytelling to weave the world back
+    together.'
+  82: '''The Hyperdimensional Henna'': A henna artist''s intricate designs open portals
+    to higher dimensions. As people use these tattoos to journey beyond known reality,
+    the artist must close a pattern that threatens to unravel the fabric of the universe.'
+  83: '''The Netherworld Wide Web'': Computer scientists accidentally create an internet
+    for the dead, allowing digital communication with the afterlife. A network engineer
+    must navigate this limbo-like realm to debug the system before the boundaries
+    between life and death dissolve completely.'
+  84: '''The Quantum Kabbalists'': Jewish mystics discover that Kabbalistic practices
+    can manipulate quantum reality. As they gain godlike powers, a skeptical physicist
+    must reconcile her scientific worldview with undeniable miracles to prevent a
+    well-meaning apocalypse.'
+  85: '''The Synesthetic Syndicates'': Criminal organizations discover how to weaponize
+    synesthesia, carrying out heists and assassinations through sensory manipulation.
+    A detective who develops artificial synesthesia must adapt to this new sensory
+    underworld to bring them down.'
+  86: '''The Mandela Effect Manipulators'': A secret society is found to be intentionally
+    creating Mandela Effects, slowly rewriting history and collective memory. A conspiracy
+    theorist and a neuroscientist form an unlikely alliance to expose the truth and
+    reclaim reality.'
+  87: '''The Origami Multiverse'': A master origami artist discovers that her paper
+    creations can fold reality itself, opening gateways to parallel universes. As
+    paper-thin realities begin to overlap, she must refold the multiverse before it
+    collapses into chaos.'
+  88: '''The Polyglot''s Paradox'': A linguist creates a ''perfect'' language that
+    allows for unambiguous communication, but those who learn it find themselves unable
+    to lie or even imagine falsehoods. As the language spreads, society teeters between
+    utopic honesty and dystopian thought control.'
+  89: '''The Quantum Quixote'': Don Quixote is brought to life as a quantum AI, his
+    noble delusions becoming reality-warping quests across the internet. A digital
+    librarian must guide this well-meaning but chaotic program through the modern
+    world before he reshapes it entirely.'
+  90: '''The Eternal Emoji'': Ancient Egyptian hieroglyphs are discovered to be proto-emojis
+    with reality-altering powers. As modern emojis begin to exhibit the same abilities,
+    a Egyptologist and a social media influencer race to prevent digital communication
+    from rewriting the fabric of existence.'
+  91: '''The Astral Archaeologists'': Archaeologists develop a technique to view past
+    events by tapping into the residual memories of artifacts. When they uncover a
+    history-shaking secret, they must navigate both past and present dangers to reveal
+    the truth.'
+  92: "'The Quantum Qur\xCA\xBCan': Quantum effects are discovered in the recitation\
+    \ of the Qur\xCA\xBCan, leading to a new understanding of the universe that merges\
+    \ science and faith. A Muslim physicist grapples with the implications as various\
+    \ factions seek to exploit this knowledge."
+  93: '''The Mnemonic Plague'': A virus begins erasing humanity''s collective memory.
+    As society crumbles, a group of ''memory keepers'' must preserve crucial knowledge
+    through a new oral tradition, fighting both the disease and those who see the
+    memory wipe as a chance to rewrite history.'
+  94: '''The Chronos Casinos'': Underground time-travel casinos allow high-rollers
+    to bet on historical events. When a down-on-his-luck gambler stumbles upon a plot
+    to rig both past and future, he must pull off the ultimate heist across multiple
+    timelines to expose the truth.'
+  95: '''The Ontological Anchors'': Reality begins to unravel when the humans whose
+    observation keeps the universe stable fall into a coma. A team of physicists and
+    philosophers race to wake them, delving into the nature of consciousness and existence
+    itself.'
+  96: '''The Quantum Ronin'': A time-displaced samurai finds himself in a cyberpunk
+    future, his code of honor clashing with a world of corporate warfare and digital
+    deception. As he navigates this new landscape, he becomes entangled in a plot
+    that threatens to erase his entire timeline.'
+  98: '''The Babel Babel'': A space elevator to the edge of the atmosphere becomes
+    home to the world''s displaced populations. As new cultures and languages evolve
+    at different levels, a linguist must navigate this vertical babel to prevent a
+    conflict that could topple civilization.'
+  99: "'The Akashic Hackers': A group of cyber-mystics discover how to access and\
+    \ manipulate the Akashic Records\xE2\u20AC\u201Dthe universe's source code. As\
+    \ reality begins to glitch around them, they race against mega-corporations seeking\
+    \ to monetize existence itself."
+  100: '''The Memetic Monks'': Tibetan monks develop a form of meditation that can
+    implant ideas directly into other minds. As this technique goes viral, a cognitive
+    scientist must find a way to preserve free will in an increasingly telepathic
+    world.'
+  101: '''The Quantum Quilt'': An Amish community''s quilts are discovered to be complex
+    quantum computers, calculating probabilities of future events. As the world seeks
+    to exploit this discovery, the community''s elder must decide whether to share
+    their secret knowledge or protect their way of life.'
+  102: '''The Chrono-Cartographers'': Mapmakers discover that accurately charting
+    an area allows them to manipulate its time flow. As nations weaponize cartography
+    to create temporal strongholds, a pacifist cartographer seeks a way to map a route
+    to peace.'
+  103: '''The Hyperdimensional Henna'': A henna artist''s intricate designs are found
+    to open portals to higher dimensions. As people use these tattoos to journey beyond
+    known reality, the artist must close a pattern that threatens to unravel the fabric
+    of the universe.'
+  104: '''The Quantum Griots'': West African storytellers discover their tales can
+    alter quantum probabilities. As reality becomes increasingly unstable, a reluctant
+    young griot must master the art of quantum storytelling to reweave the world.'
+  105: '''The Netherworld Wide Web'': Computer scientists accidentally create an internet
+    for the dead, allowing digital communication with the afterlife. A network engineer
+    must navigate this limbo-like realm to debug the system before the boundaries
+    between life and death dissolve.'
+  106: '''The Paradox Pariahs'': Time travelers exiled from their own eras for creating
+    paradoxes form a community in a bubble of fractured time. When their haven begins
+    to collapse, they must work together to find a place in history without erasing
+    themselves from existence.'
+  107: '''The Quantum Qareen'': Islamic lore of the qareen (personal djinn) is proven
+    true, but they''re quantum beings simultaneously good and evil. A Sufi mystic
+    grapples with the endless moral quandaries of every decision as the world reckons
+    with their quantum conscience.'
+  108: '''The Metacognition Metastasis'': A new meditation technique allows people
+    to enter their own minds as a physical space. When practitioners become trapped
+    in mental labyrinths of their own making, a psychonaut must journey through the
+    collective unconscious to lead them out.'
+  109: '''The Eschaton Equation'': A mathematician discovers an equation that predicts
+    the end of the universe with increasing accuracy as more people learn of it. As
+    knowledge of the formula spreads, she races to find a solution before universal
+    awareness collapses reality.'
+  110: '''The Quantum Quixote'': Don Quixote is pulled into the 21st century by a
+    quantum experiment gone awry. As he tilts at wind turbines and battles self-driving
+    cars, a Spanish literature professor must convince the world that the delusional
+    knight is real while grappling with his own sanity.'
+  111: '''The Morphic Resonance Revolution'': The theory of morphic resonance is proven,
+    making the past mutable through collective belief. As warring factions attempt
+    to reshape history in their image, a historian must find a way to stabilize reality
+    before the present is erased.'
+  112: '''The Hyper-Empaths'': A new stage of human evolution produces individuals
+    capable of feeling the emotions of everyone on the planet simultaneously. As these
+    hyper-empaths struggle with the weight of global consciousness, one must find
+    a way to unite humanity''s emotional landscape to prevent mass insanity.'
+  113: '''The Quantum Pharaohs'': Egyptologists discover the pyramids are quantum
+    computers preserving the pharaohs'' consciousness. As modern leaders upload their
+    minds to seize immortal power, an archaeologist races to unlock the ancient fail-safe
+    hidden within the tombs.'
+  114: "'The Codex Vitae Virus': A computer virus begins infecting human minds, turning\
+    \ people's lives into literal open books that anyone can read\xE2\u20AC\u201D\
+    and potentially edit. A cyber-psychologist must find a way to close humanity's\
+    \ neural networks before privacy and free will become extinct concepts."
+  115: '''The Whispering Walls'': In a city where buildings absorb and replay conversations,
+    a deaf architect discovers she can communicate with the structures themselves.
+    What century-old secret will she uncover that could reshape the city''s future?'
+  116: '''The Last Lighthouse'': On a world of perpetual storms, a lonely lighthouse
+    keeper discovers a way to calm the seas. But as ships begin to arrive on the now-tranquil
+    shores, what ancient horror has he unwittingly unleashed from the depths?'
+  117: '''The Clockwork Counsel'': In a steampunk world, a young gear-smith is appointed
+    to maintain the massive mechanical computer that governs the empire. When she
+    discovers a hidden cog that predicts the empire''s fall, whose agenda does it
+    serve?'
+  118: '''The Flavor Alchemist'': A chef who can infuse emotions into food rises to
+    fame in a cutthroat culinary world. But when diners start acting out the emotions
+    in dangerous ways, what dark ingredient is she unknowingly using?'
+  119: '''The Gravity Prospectors'': Explorers hunt for pockets of altered gravity
+    across the globe. When they discover a place where gravity repels instead of attracts,
+    what other laws of physics will they find have been broken?'
+  120: '''The Origami Oracle'': A child''s paper creations begin to predict the future
+    with alarming accuracy. As the world''s powers fight for control of this origami
+    prophet, what message is the child truly trying to fold into existence?'
+  121: '''The Neon Shamans'': In a cyberpunk megacity, shamans tap into the ''spirit''
+    of technology. When a talented technomancer discovers an AI spirit that claims
+    it can uplift humanity, what price will this digital ascension demand?'
+  122: '''The Palindrome Prophets'': Seers can glimpse the future, but only by speaking
+    in perfect palindromes. When a stuttering prophet prodigy foresees global devastation,
+    can she get the warning out before it''s too late?'
+  123: '''The Ashen Artisans'': In a world where color is a finite resource, a painter
+    discovers a technique to create new hues from ash. As her art begins to literally
+    reshape reality, whose cremated remains are fueling this chromatic revolution?'
+  124: '''The Tidal Timekeepers'': On a planet where time ebbs and flows like the
+    tides, a horologist builds a clock that can stabilize the temporal flux. But as
+    time normalizes, what aspects of their culture and physics will be lost forever?'
+  125: '''The Silence Sculptors'': Artists carve pockets of silence into a world overwhelmed
+    by noise. When silence becomes addictive, what sounds are people desperate to
+    escape?'
+  126: '''The Last Cartographer'': In a world where maps reshape reality, the last
+    cartographer is hunted by those who want to control the world''s form. What secret
+    map is she hiding that everyone is after?'
+  127: '''The Emotional Alchemists'': Practitioners learn to transmute one emotion
+    into another. In a world of manipulated feelings, what is the true value of genuine
+    emotion?'
+  128: '''The Quantum Quilt'': An Amish seamstress unknowingly creates quilts that
+    map quantum realities. How will her community react when outsiders discover their
+    farm is a hub for interdimensional travel?'
+  129: '''The Memory Bankers'': In a society where memories are currency, a master
+    thief plots to rob the largest memory bank. But what priceless memory is she really
+    after?'
+  130: '''The Gravity Weavers'': Artisans manipulate localized gravity to create stunning
+    sculptures. What happens when a piece begins affecting gravity on a global scale?'
+  131: '''The Chronos Gamblers'': Underground time-travel casinos allow betting on
+    historical events. What happens when a down-on-his-luck gambler discovers the
+    house is cheating by altering the past?'
+  132: '''The Lexicon Labyrinth'': A dictionary becomes a portal to a world constructed
+    entirely of words. What power lies in finding the right definition?'
+  133: '''The Synesthetic Spies'': In a world where nation-states are defined by unique
+    sensory combinations, spies train to perceive all five senses as one. How does
+    a spy with a rare condition that allows her to sense truth and lies change the
+    balance of global power?'
+  134: '''The Dreamshare Hotel'': A luxury resort offers clients the chance to vacation
+    in shared dreams. What happens when a dreamer refuses to wake up, holding the
+    others hostage in a paradise of their own making?'
+  135: '''The Photosynthetic Revolution'': Humans develop chlorophyll-infused skin,
+    eliminating world hunger. How does society restructure when food becomes obsolete?'
+  136: '''The Mnemonic Ink'': A tattoo artist discovers her ink can transfer skills
+    and memories between people. How does society change when experiences become a
+    commodity?'
+  137: '''The Quantum Orchestra'': A string quartet learns their music can alter quantum
+    probabilities. What reality-shaping concert will they play when they realize their
+    power?'
+  138: '''The Pandora AI'': An AI designed to answer any question becomes eerily accurate,
+    but each answer seems to cause catastrophes. What is the ultimate question humanity
+    should fear asking?'
+  139: '''The Empathy Plague'': A pandemic causes people to uncontrollably experience
+    the emotions of others around them. Can an emotional ''immune'' person find the
+    cure before society collapses?'
+  140: '''The Chrono-Archaeologists'': Scientists discover a way to excavate time
+    instead of earth, uncovering lost moments in history. What happens when they dig
+    too deep and unearth a history-altering secret?'
+  141: '''The Karma Mechanics'': In a world where karma is quantifiable and adjustable,
+    what happens when someone finds a way to game the system?'
+  142: '''The Whisper Market'': In a society where secrets are the most valuable currency,
+    what classified information could bring down the entire economy?'
+  143: '''The Oneiric Explorers'': Dream technology allows people to build and visit
+    worlds in their sleep. What happens when dream-made monsters start crossing over
+    to reality?'
+  144: '''The Quantum Necromancers'': Physicists discover that the dead exist in quantum
+    superposition. What happens when they develop technology to collapse the wave
+    function and bring back the deceased?'
+  145: '''The Memory Weavers'': Artisans can weave memories into fabric. What forgotten
+    event is sewn into a tapestry that everyone wants to destroy?'
+  146: '''The Probability Storms'': Localized events occur where the laws of probability
+    break down. How does society function when luck becomes a tangible force?'
+  147: '''The Emotional Sommeliers'': In a future where feelings are distilled into
+    wines, what long-lost emotion is found in an ancient vintage?'
+  148: '''The Shapeshifter Sanctuary'': The last safe haven for shapeshifters is threatened
+    by a world that fears them. What shocking truth about humanity''s origins will
+    be revealed if the sanctuary falls?'
+  149: '"The Symbiont Symphonists": Musicians bond with alien symbiotes to create
+    otherworldly music. What happens when the symbiotes start composing on their own?'
+  150: '"The Quantum Quorum": Jurors for a high-stakes trial are quantum entangled,
+    forcing them to come to a unanimous decision. How can justice prevail when every
+    juror experiences the same doubts simultaneously?'
+  151: '"The Charm Farmers": Luck becomes a harvestable resource. What happens when
+    a farmer stumbles upon a bumper crop of good fortune in a world desperate for
+    hope?'
+  152: '"The Multiverse Refugees": Individuals from dying parallel Earths seek asylum
+    in our reality. How does society cope with infinite versions of the same people?'
+  153: "\"The D\xC3\xA9j\xC3\_ Vu Epidemic\": People start living the same day repeatedly,\
+    \ but each person is trapped in a different day. Can a temporal epidemiologist\
+    \ find patient zero before time itself unravels?"
+  154: '"The Emotional Alchemists": Practitioners learn to transmute one emotion into
+    another. In a world where feelings are manipulated, what is the value of genuine
+    emotion?'
+  155: '"The Neuromorphic Cities": Urban landscapes develop sentience. How do humans
+    coexist when their environments have desires and fears of their own?'
+used_plots:
+- 97: "'The Schr\xC3\xB6dinger Syndicate': A criminal organization exploits quantum\
+    \ superposition to commit perfect crimes, existing in multiple states to evade\
+    \ justice. A detective with the unique ability to collapse quantum states must\
+    \ enter a world of probability to catch them."

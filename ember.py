@@ -4,7 +4,9 @@ import os
 import time
 from dotenv import load_dotenv
 from utils.config_helper import load_config
-
+from utils.topic_selector import plot_selector
+import yaml
+import random
 from story_generator import (
     generate_short_script,
     improve_story,
@@ -23,8 +25,6 @@ TODO :
 - add a constants file
 """
 
-
-
 if __name__ == "__main__":
     ##########################################################################
     ############################### 0 - Initial setup ########################
@@ -34,6 +34,7 @@ if __name__ == "__main__":
     load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = "E:\\Ember\\Ember\\ember\\data"
+    plot_file = r'E:\Ember\Ember\ember\plots.yaml'
     # TODO : base folder setup function to be added to all files 
     # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -44,7 +45,7 @@ if __name__ == "__main__":
 
     # Define the topic for the story generation
     # TODO - make the topic picking dynamic
-    input_dict = {"topic": "'The Hereditary Hack': A second-generation cybercriminal discovers her legendary parents' last heist is still running in the background of the internet. What world-changing secret is lurking in the code, and why did they hide it from her?"}
+    input_dict = {"topic": plot_selector(plot_file)}
     # TODO - Update the input audio files folder and create a library to
     # choose from
     input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
@@ -54,9 +55,9 @@ if __name__ == "__main__":
     # Generate the initial story
     print("Generating the initial story...")
     story = generate_short_script(input_dict)
-
+    print(f"story --> {story}")
     # Specify the number of improvement iterations
-    iterations = 2
+    iterations = 3
 
     # Improve the generated story
     print("\nImproving the story...")
@@ -84,7 +85,7 @@ if __name__ == "__main__":
     prompt_start_time = time.time()
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
-    story_data["sentences"]= split_story_into_sentences(story_data.get("story", {}))
+    story_dict["sentences"]= split_story_into_sentences(story_dict.get("story", {}))
     sentences_with_prompts = generate_prompts_for_sentences(
         story_dict.get("sentences", {}),story_dict.get("story", {})
     )
