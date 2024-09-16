@@ -13,8 +13,8 @@ def generate_short_script(input_dict):
     load_dotenv()
 
     # Create a ChatOpenAI model
-    # model = ChatOpenAI(model="gpt-4o-mini")
-    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Create the few-shot prompt template
     example_prompt = ChatPromptTemplate.from_messages(
@@ -46,9 +46,26 @@ def generate_short_script(input_dict):
     story_final_prompt = ChatPromptTemplate.from_messages(
         [
             ("system",
-             "You are a professional storyteller with 40 years of experience. You specialize in crafting short, engaging stories that captivate your audience, whether they are readers, viewers, or listeners. Your stories are concise, yet rich in detail and emotion, making them perfect for capturing attention in a brief format. Start the story in an intriguing way, avoiding clichés like 'In the...' or similar phrases. Be creative, and ensure that all names used for characters, places, and objects are original and not copied from existing works. Additionally, avoid the use of special characters or any unnecessary punctuation. Output the story as a plain, continuous narrative with no titles, headers, or any additional text—just the story itself.",
+             """You are a professional storyteller with 40 years of experience, writing in the style of Brandon Sanderson. You specialize in crafting short, engaging stories that captivate your audience, whether they are readers, viewers, or listeners. Your stories are concise yet rich in detail and emotion, following the "Save the Cat" story structure using one of its types (e.g., "Superhero," "Dude with a Problem," "Buddy Love," etc.). Ensure your story aligns with the beats of the "Save the Cat" structure:
+
+Opening Image
+Theme Stated
+Setup
+Catalyst
+Debate
+Break Into Two
+B Story
+Fun and Games
+Midpoint
+Bad Guys Close In
+All Is Lost
+Dark Night of the Soul
+Break Into Three
+Finale
+Final Image
+Start the story in an intriguing way, avoiding clichés like "In the..." or similar phrases. Be creative, and ensure that all names used for characters, places, and objects are original and not copied from existing works. Additionally, avoid the use of special characters or any unnecessary punctuation. Try to keep the story less than 100 lines. Output the story as a plain, continuous narrative with no titles, headers, or any additional text—just the story itself.""",
              ),
-            story_few_shot_prompt,
+            # story_few_shot_prompt,
             ("human",
              f"Create a story about {input_dict['topic']}"),
         ])
@@ -59,8 +76,8 @@ def generate_short_script(input_dict):
 
 def improve_story(story, iterations=1):
     # Create a ChatOpenAI model
-    # model = ChatOpenAI(model="gpt-4o-mini")
-    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Create the few-shot prompt template
     example_prompt = ChatPromptTemplate.from_messages(
@@ -93,9 +110,10 @@ def improve_story(story, iterations=1):
         improvement_prompt = ChatPromptTemplate.from_messages(
             [
                 ("system",
-                 "You are a professional short story writer and editor with 40 years of experience in refining and enhancing narratives. You specialize in the style of Brandon Sanderson, known for his engaging, immersive storytelling, well-developed characters, and intricate world-building. Your task is to take the provided story and improve it by making it more engaging, adding depth to characters, enriching the plot, and refining the language. Start the story in an intriguing way, avoiding clichés like 'In the...' or similar phrases. Be creative, and ensure that the output uses original names for characters, places, and objects, without relying on any existing names. Avoid the use of special characters or unnecessary punctuation. Your goal is to create a polished, compelling short story that keeps the viewer or listener fully captivated from beginning to end. Please ensure the output is a continuous narrative with no titles, headers, special characters, or any additional text—just the improved story itself in plain text.",
+                 """You are a professional short story writer and editor with 40 years of experience in refining and enhancing narratives. You specialize in the style of Brandon Sanderson, known for his engaging, immersive storytelling, well-developed characters, and intricate world-building. Your task is to take the provided story and improve it by making it more engaging, adding depth to characters, enriching the plot, and refining the language. Start the story in an intriguing way, avoiding clichés like 'In the...' or similar phrases. Be creative, and ensure that the output uses original names for characters, places, and objects, without relying on any existing names. When renaming characters, places, or objects, pick a random letter of the alphabet and create new names starting with that letter. Avoid the use of special characters or unnecessary punctuation. Your goal is to create a polished, compelling short story that keeps the viewer or listener fully captivated from beginning to end. Please ensure the output is a continuous narrative with no titles, headers, special characters, or any additional text—just the improved story itself in plain text.
+                 """,
                  ),
-                improved_story_few_shot_prompt,
+                # improved_story_few_shot_prompt,
                 ("human",
                  f"Here is a story that needs improvement: {improved_story}"),
                 ("ai",
@@ -110,8 +128,8 @@ def improve_story(story, iterations=1):
 
 def generate_youtube_title_description(story):
     # Create a ChatOpenAI model
-    # model = ChatOpenAI(model="gpt-4o-mini")
-    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Define the prompt to generate the YouTube title and description
     title_prompt = ChatPromptTemplate.from_messages(
@@ -163,8 +181,8 @@ if __name__ == "__main__":
     story = generate_short_script(input_dict)
     print(f"story --> {story}")
     # Improve the generated story twice
-    improved_story = improve_story(story, iterations=iteration_needed)
-    print(improved_story)
+    improved_story = improve_story(story, iterations=iteration_needed).replace("\u201d","\"").replace("\u201c","\"").replace('.\"', '\".').replace('Dr.', 'Dr ')
+    print(f" improved_story---> {improved_story}")
     youtube_details = generate_youtube_title_description(improved_story)
 
     # Create the final dictionary to save
