@@ -11,12 +11,13 @@ from story_generator import (
     generate_short_script,
     improve_story,
     generate_youtube_title_description,
+    generate_story,
 )
 from prompt_generator import generate_prompts_for_sentences,split_story_into_sentences
 from audio_generator import generate_audio_from_json
 from image_generator import generate_images_for_prompts, extract_timestamp_from_path
 from video_generator import generate_and_concatenate_videos
-
+from langchain_openai import ChatOpenAI
 
 """
 TODO :
@@ -31,6 +32,7 @@ if __name__ == "__main__":
     ##########################################################################
     # Start measuring the time
     start_time = time.time()
+    model = ChatOpenAI(model="gpt-4o-mini")
     # load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = "E:\\Ember\\Ember\\ember\\data"
@@ -54,14 +56,16 @@ if __name__ == "__main__":
     ##########################################################################
     # Generate the initial story
     print("Generating the initial story...")
-    story = generate_short_script(input_dict)
+    # story = generate_short_script(input_dict)
+    story= generate_story(model,input_dict )
     print(f"story --> {story}")
     # Specify the number of improvement iterations
     iterations = 3
 
     # Improve the generated story
     print("\nImproving the story...")
-    improved_story = improve_story(story, iterations=iterations)
+    # improved_story = improve_story(story, iterations=iterations)
+    improved_story = story
     print(improved_story)
     youtube_details = generate_youtube_title_description(improved_story)
     # Create the final dictionary to save
@@ -119,7 +123,7 @@ if __name__ == "__main__":
         SAVE_DIR,
         story_dict.get("sentences", {}),
         timestamp,
-        3
+        1
     )
 
     # Define the final image output path

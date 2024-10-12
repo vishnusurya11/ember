@@ -10,7 +10,7 @@ import json
 
 def generate_short_script(input_dict):
     # Load environment variables
-    load_dotenv()
+    # load_dotenv()
 
     # Create a ChatOpenAI model
     model = ChatOpenAI(model="gpt-4o-mini")
@@ -156,14 +156,72 @@ def generate_youtube_title_description(story):
     }
 
 
+def generate_story(model,input_dict):
+    
+
+
+    # Create the final prompt template for the story
+    story_final_prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system",
+             "You are a professional storyteller with 40 years of experience. You specialize in crafting short, engaging stories that captivate your audience, whether they are readers, viewers, or listeners. Your stories are concise, yet rich in detail and emotion, making them perfect for capturing attention in a brief format. Start the story in an intriguing way, avoiding clichés like 'In the...' or similar phrases. Be creative, and ensure that all names used for characters, places, and objects are original and not copied from existing works. Additionally, avoid the use of special characters or any unnecessary punctuation. Output the story as a plain, continuous narrative with no titles, headers, or any additional text—just the story itself.",
+             ),
+            ("human",
+             f"""
+             You are a writer with 40 years of experience in writing short stories and have won many awards like Mary Robinette.
+
+Story Structure: Utilize the MICE Quotient (Milieu, Inquiry, Character, Event) to structure your story. You may combine multiple elements and nest them appropriately by opening and closing threads in sequence (e.g., open Milieu <M>, then Inquiry <I>, and close in reverse </I></M>).
+
+Opening: In the first three sentences, establish:
+
+Who: Introduce the main character through action, highlighting their attitude or a defining trait.
+Where: Set the scene using a sensory detail to ground the reader.
+Genre: Include a genre-specific detail to orient the reader.
+Conflict Introduction:
+
+Goal: Clearly state what the character is trying to achieve and why it matters to them.
+Obstacle: Introduce what is preventing them from reaching their goal.
+Try-Fail Cycles:
+
+Incorporate at least one try-fail cycle where the character attempts to overcome the obstacle and fails, making the situation worse.
+Use "Yes, but" or "No, and" structures to escalate tension and complicate the character's efforts.
+Resolution:
+
+Transition to a try-succeed cycle where the character finally overcomes the obstacle.
+Use "Yes, and" or "No, but" structures to move toward resolution and show progress.
+Ending:
+
+Close out the MICE elements you opened, mirroring the opening.
+Re-establish the Who, Where, and Genre/Mood, showing how things have changed.
+Provide a satisfying conclusion that delivers a specific emotional impact.
+Character and Setting Limitations:
+
+Limit the story to no more than two characters and one location to maintain focus and brevity.
+Instructions:
+
+Use the topic provided ({input_dict['topic']}) to craft your story.
+Ensure that your story follows the MICE Quotient structure, opening and closing threads appropriately.
+Incorporate sensory details and character actions to engage the reader.
+Focus on delivering a specific emotional experience through the story.
+             """),
+        ])
+
+    result = story_final_prompt | model | StrOutputParser()
+    return result.invoke({"input_dict": input_dict})
+
 if __name__ == "__main__":
     # Initial story generation
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
     iteration_needed = 2
     input_dict = {"topic": "'The Hereditary Hack': A second-generation cybercriminal discovers her legendary parents' last heist is still running in the background of the internet. What world-changing secret is lurking in the code, and why did they hide it from her?"}
-    story = generate_short_script(input_dict)
-    print(f"story --> {story}")
-    # Improve the generated story twice
-    improved_story = improve_story(story, iterations=iteration_needed)
+    story = generate_story(model,input_dict )
+    print(f"story ---> {story}")
+    # story = generate_short_script(input_dict)
+    # print(f"story --> {story}")
+    # # Improve the generated story twice
+    # improved_story = improve_story(story, iterations=iteration_needed)
+    improved_story = story
     print(improved_story)
     youtube_details = generate_youtube_title_description(improved_story)
 
