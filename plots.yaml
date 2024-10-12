@@ -90,9 +90,6 @@ unused_plots:
   26: '''The Synesthesia Syndrome'': A new drug unlocks synesthesia in users, but
     overuse starts blending senses permanently. A detective who tastes colors must
     solve a murder where the only clues are sensory.'
-  27: '''The Ancestral Download'': A tech company offers to download ancestors'' memories
-    into clients'' minds. When forgotten generational trauma and skills surface, society
-    transforms unpredictably.'
   28: '''The Quantum Qi'': Scientists prove qi is manipulation of quantum fields.
     As ancient martial arts become devastatingly effective, a former physicist must
     revive a long-lost technique to prevent qi-powered wars.'
@@ -225,10 +222,6 @@ unused_plots:
     with viral content shaping reality. A disillusioned social media manager discovers
     she''s the chosen one of this new digital pantheon and must master meme magic
     to prevent an apocalyptic ''trend''.'
-  68: '''The Quantum Quixote'': Don Quixote is pulled through time by a quantum experiment,
-    seeing modern technology as magic and monsters. A literature professor must help
-    the knight navigate the 21st century while protecting him from those who would
-    exploit his anachronistic worldview.'
   69: '''The Chronosomniac Clinic'': A sleep disorder causes people to involuntarily
     time travel while dreaming. A ''dream detective'' who can enter others'' dreams
     must solve a murder that occurs across multiple time periods and states of consciousness.'
@@ -293,10 +286,6 @@ unused_plots:
     synesthesia, carrying out heists and assassinations through sensory manipulation.
     A detective who develops artificial synesthesia must adapt to this new sensory
     underworld to bring them down.'
-  86: '''The Mandela Effect Manipulators'': A secret society is found to be intentionally
-    creating Mandela Effects, slowly rewriting history and collective memory. A conspiracy
-    theorist and a neuroscientist form an unlikely alliance to expose the truth and
-    reclaim reality.'
   87: '''The Origami Multiverse'': A master origami artist discovers that her paper
     creations can fold reality itself, opening gateways to parallel universes. As
     paper-thin realities begin to overlap, she must refold the multiverse before it
@@ -523,3 +512,14 @@ used_plots:
     \ superposition to commit perfect crimes, existing in multiple states to evade\
     \ justice. A detective with the unique ability to collapse quantum states must\
     \ enter a world of probability to catch them."
+- 86: '''The Mandela Effect Manipulators'': A secret society is found to be intentionally
+    creating Mandela Effects, slowly rewriting history and collective memory. A conspiracy
+    theorist and a neuroscientist form an unlikely alliance to expose the truth and
+    reclaim reality.'
+- 68: '''The Quantum Quixote'': Don Quixote is pulled through time by a quantum experiment,
+    seeing modern technology as magic and monsters. A literature professor must help
+    the knight navigate the 21st century while protecting him from those who would
+    exploit his anachronistic worldview.'
+- 27: '''The Ancestral Download'': A tech company offers to download ancestors'' memories
+    into clients'' minds. When forgotten generational trauma and skills surface, society
+    transforms unpredictably.'

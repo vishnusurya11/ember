@@ -31,7 +31,7 @@ if __name__ == "__main__":
     ##########################################################################
     # Start measuring the time
     start_time = time.time()
-    load_dotenv()
+    # load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = "E:\\Ember\\Ember\\ember\\data"
     plot_file = r'E:\Ember\Ember\ember\plots.yaml'

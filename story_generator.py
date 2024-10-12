@@ -13,8 +13,8 @@ def generate_short_script(input_dict):
     load_dotenv()
 
     # Create a ChatOpenAI model
-    # model = ChatOpenAI(model="gpt-4o-mini")
-    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Create the few-shot prompt template
     example_prompt = ChatPromptTemplate.from_messages(
@@ -59,8 +59,8 @@ def generate_short_script(input_dict):
 
 def improve_story(story, iterations=1):
     # Create a ChatOpenAI model
-    # model = ChatOpenAI(model="gpt-4o-mini")
-    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Create the few-shot prompt template
     example_prompt = ChatPromptTemplate.from_messages(
@@ -110,8 +110,8 @@ def improve_story(story, iterations=1):
 
 def generate_youtube_title_description(story):
     # Create a ChatOpenAI model
-    # model = ChatOpenAI(model="gpt-4o-mini")
-    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Define the prompt to generate the YouTube title and description
     title_prompt = ChatPromptTemplate.from_messages(
