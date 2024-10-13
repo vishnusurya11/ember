@@ -47,10 +47,8 @@ def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
         tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
         wav = tts.tts(text=sentence, speaker_wav=sample_input, language="en")
         tts.tts_to_file(
-            text=sentence,
-            speaker_wav=sample_input,
-            language="en",
-            file_path=file_path)
+            text=sentence, speaker_wav=sample_input, language="en", file_path=file_path
+        )
         print(f"Generated audio for sentence {key}")
 
         # Combine the sentence audio into a single file
@@ -82,7 +80,6 @@ if __name__ == "__main__":
     input_mp3_path = "sample_5.mp3"
 
     # Call the function to generate audio from the JSON file
-    wav_path, mp3_path = generate_audio_from_json(
-        folder_path, input_mp3=input_mp3_path)
+    wav_path, mp3_path = generate_audio_from_json(folder_path, input_mp3=input_mp3_path)
 
     print(f"Generated audio files:\nWAV: {wav_path}\nMP3: {mp3_path}")

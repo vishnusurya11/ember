@@ -5,18 +5,11 @@ import numpy as np
 
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip("#")
-    return tuple(int(hex_color[i: i + 2], 16) for i in (0, 2, 4))
+    return tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
 
 
 # Create subtitle clip using PIL
-def create_subtitle_clip(
-        text,
-        fontsize,
-        color,
-        size,
-        duration,
-        position,
-        font_name):
+def create_subtitle_clip(text, fontsize, color, size, duration, position, font_name):
     img = Image.new("RGBA", size, (0, 0, 0, 0))  # Fully transparent background
     draw = ImageDraw.Draw(img)
     try:

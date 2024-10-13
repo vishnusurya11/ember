@@ -7,62 +7,78 @@ import math
 from PIL import Image
 import numpy as np
 
+
 def zoom_effect(clip, zoom_ratio=0.04):
     def effect(get_frame, t):
         img = Image.fromarray(get_frame(t))
         base_size = img.size
         new_size = [
             math.ceil(img.size[0] * (1 + (zoom_ratio * t))),
-            math.ceil(img.size[1] * (1 + (zoom_ratio * t)))
+            math.ceil(img.size[1] * (1 + (zoom_ratio * t))),
         ]
         new_size[0] = new_size[0] + (new_size[0] % 2)
         new_size[1] = new_size[1] + (new_size[1] % 2)
         img = img.resize(new_size, Image.LANCZOS)
         x = math.ceil((new_size[0] - base_size[0]) / 2)
         y = math.ceil((new_size[1] - base_size[1]) / 2)
-        img = img.crop([x, y, new_size[0] - x, new_size[1] - y]).resize(base_size, Image.LANCZOS)
+        img = img.crop([x, y, new_size[0] - x, new_size[1] - y]).resize(
+            base_size, Image.LANCZOS
+        )
         result = np.array(img)
         img.close()
         return result
+
     return clip.fl(effect)
+
 
 def pan_effect(clip, pan_ratio, direction):
     def effect(get_frame, t):
         img = Image.fromarray(get_frame(t))
         base_size = img.size
-        
-        if direction in ['left', 'right']:
+
+        if direction in ["left", "right"]:
             new_width = math.ceil(base_size[0] / (1 - pan_ratio))
             new_size = (new_width, base_size[1])
         else:  # 'up' or 'down'
             new_height = math.ceil(base_size[1] / (1 - pan_ratio))
             new_size = (base_size[0], new_height)
-        
+
         img = img.resize(new_size, Image.LANCZOS)
-        
-        if direction == 'right':
+
+        if direction == "right":
             x = int((new_size[0] - base_size[0]) * (t / clip.duration))
             y = 0
-        elif direction == 'left':
+        elif direction == "left":
             x = int((new_size[0] - base_size[0]) * (1 - t / clip.duration))
             y = 0
-        elif direction == 'down':
+        elif direction == "down":
             x = 0
             y = int((new_size[1] - base_size[1]) * (t / clip.duration))
         else:  # 'up'
             x = 0
             y = int((new_size[1] - base_size[1]) * (1 - t / clip.duration))
-        
+
         img = img.crop([x, y, x + base_size[0], y + base_size[1]])
-        
+
         result = np.array(img)
         img.close()
         return result
+
     return clip.fl(effect)
 
-def create_video_for_sentence(audio_path, image_folder, output_path, target_resolution=(1920, 1080), effect_type=None, effect_ratio=0.06):
+
+def create_video_for_sentence(
+    audio_path,
+    image_folder,
+    output_path,
+    target_resolution=(1920, 1080),
+    effect_type=None,
+    effect_ratio=0.06,
+):
     # Get all images in the folder that contain 'facefix' in the name
-    images = [f for f in os.listdir(image_folder) if "facefix" in f and f.endswith(".png")]
+    images = [
+        f for f in os.listdir(image_folder) if "facefix" in f and f.endswith(".png")
+    ]
 
     if not images:
         raise FileNotFoundError(f"No 'facefix' images found in {image_folder}")
@@ -73,19 +89,23 @@ def create_video_for_sentence(audio_path, image_folder, output_path, target_reso
 
     # Create the base clip
     audio_clip = mp.AudioFileClip(audio_path)
-    image_clip = mp.ImageClip(image_path).set_duration(audio_clip.duration).resize(target_resolution)
+    image_clip = (
+        mp.ImageClip(image_path)
+        .set_duration(audio_clip.duration)
+        .resize(target_resolution)
+    )
 
     # If effect_type is not specified, choose randomly
     if effect_type is None:
-        effect_type = random.choice(['zoom_in', 'zoom_out', 'pan'])
+        effect_type = random.choice(["zoom_in", "zoom_out", "pan"])
 
     # Apply effect
-    if effect_type == 'zoom_in':
+    if effect_type == "zoom_in":
         effected_clip = zoom_effect(image_clip, effect_ratio)
-    elif effect_type == 'zoom_out':
+    elif effect_type == "zoom_out":
         effected_clip = zoom_effect(image_clip, effect_ratio).fx(mp.vfx.time_mirror)
-    elif effect_type == 'pan':
-        direction = random.choice(['left', 'right', 'up', 'down'])
+    elif effect_type == "pan":
+        direction = random.choice(["left", "right", "up", "down"])
         effected_clip = pan_effect(image_clip, effect_ratio, direction)
     else:
         raise ValueError("effect_type must be 'zoom_in', 'zoom_out', 'pan', or None")
@@ -96,7 +116,16 @@ def create_video_for_sentence(audio_path, image_folder, output_path, target_reso
     # Write the output
     final_clip.write_videofile(output_path, fps=30)
 
-def generate_and_concatenate_videos(audio_base_path, images_base_path, sentences, output_folder, final_output_path, target_resolution=(1920, 1080), effect_type=None):
+
+def generate_and_concatenate_videos(
+    audio_base_path,
+    images_base_path,
+    sentences,
+    output_folder,
+    final_output_path,
+    target_resolution=(1920, 1080),
+    effect_type=None,
+):
     os.makedirs(output_folder, exist_ok=True)
     video_clips = []
 
@@ -115,7 +144,9 @@ def generate_and_concatenate_videos(audio_base_path, images_base_path, sentences
         output_video = os.path.join(output_folder, f"{key}.mp4")
 
         try:
-            create_video_for_sentence(audio_file, image_folder, output_video, target_resolution, effect_type)
+            create_video_for_sentence(
+                audio_file, image_folder, output_video, target_resolution, effect_type
+            )
             video_clips.append(mp.VideoFileClip(output_video))
         except Exception as e:
             print(f"Failed to create video for {key}: {e}")
@@ -124,6 +155,7 @@ def generate_and_concatenate_videos(audio_base_path, images_base_path, sentences
         # Concatenate all video clips into one final video
         final_clip = mp.concatenate_videoclips(video_clips)
         final_clip.write_videofile(final_output_path, fps=30)
+
 
 if __name__ == "__main__":
     base_folder = r"E:\Ember\Ember\ember\data\20240904192910"
@@ -149,7 +181,7 @@ if __name__ == "__main__":
         video_output_folder,
         final_video_output,
         target_resolution=(1920, 1080),
-        effect_type=None  # Set to None for random selection, or specify 'zoom_in', 'zoom_out', or 'pan'
+        effect_type=None,  # Set to None for random selection, or specify 'zoom_in', 'zoom_out', or 'pan'
     )
 
     # Update the JSON with the video output path

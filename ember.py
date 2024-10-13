@@ -13,7 +13,7 @@ from story_generator import (
     generate_youtube_title_description,
     generate_story,
 )
-from prompt_generator import generate_prompts_for_sentences,split_story_into_sentences
+from prompt_generator import generate_prompts_for_sentences, split_story_into_sentences
 from audio_generator import generate_audio_from_json
 from image_generator import generate_images_for_prompts, extract_timestamp_from_path
 from video_generator import generate_and_concatenate_videos
@@ -36,8 +36,8 @@ if __name__ == "__main__":
     # load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = "E:\\Ember\\Ember\\ember\\data"
-    plot_file = r'E:\Ember\Ember\ember\plots.yaml'
-    # TODO : base folder setup function to be added to all files 
+    plot_file = r"E:\Ember\Ember\ember\plots.yaml"
+    # TODO : base folder setup function to be added to all files
     # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     folder_name = os.path.join(base_data_folder, timestamp)
@@ -50,14 +50,14 @@ if __name__ == "__main__":
     input_dict = {"topic": plot_selector(plot_file)}
     # TODO - Update the input audio files folder and create a library to
     # choose from
-    input_mp3_path = "sample_5.mp3" #TODO - make it dynamic
+    input_mp3_path = "sample_5.mp3"  # TODO - make it dynamic
     ##########################################################################
     ############################### 1 - Story Generator ######################
     ##########################################################################
     # Generate the initial story
     print("Generating the initial story...")
     # story = generate_short_script(input_dict)
-    story= generate_story(model,input_dict )
+    story = generate_story(model, input_dict)
     print(f"story --> {story}")
     # Specify the number of improvement iterations
     iterations = 3
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     # Create the final dictionary to save
     story_dict = {
         "story": improved_story,
-        "youtube_details" : youtube_details,
+        "youtube_details": youtube_details,
     }
 
     # Save the dictionary to a JSON file
@@ -89,9 +89,9 @@ if __name__ == "__main__":
     prompt_start_time = time.time()
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
-    story_dict["sentences"]= split_story_into_sentences(story_dict.get("story", {}))
+    story_dict["sentences"] = split_story_into_sentences(story_dict.get("story", {}))
     sentences_with_prompts = generate_prompts_for_sentences(
-        story_dict.get("sentences", {}),story_dict.get("story", {})
+        story_dict.get("sentences", {}), story_dict.get("story", {})
     )
     story_dict["sentences"] = sentences_with_prompts
 
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         SAVE_DIR,
         story_dict.get("sentences", {}),
         timestamp,
-        1
+        2,
     )
 
     # Define the final image output path
@@ -147,8 +147,7 @@ if __name__ == "__main__":
     audio_start_time = time.time()
     # Call the audio generation function using the folder path
 
-    wav_path, mp3_path = generate_audio_from_json(
-        folder_name, input_mp3=input_mp3_path)
+    wav_path, mp3_path = generate_audio_from_json(folder_name, input_mp3=input_mp3_path)
 
     # Update the JSON file with the audio output path
     story_dict["audio_output"] = mp3_path
@@ -170,7 +169,6 @@ if __name__ == "__main__":
     final_video_output = os.path.join(folder_name, "final_story.mp4")
     audio_folder = os.path.join(folder_name, "verba")
 
-
     generate_and_concatenate_videos(
         audio_base_path=audio_folder,
         images_base_path=final_image_folder,
@@ -178,9 +176,8 @@ if __name__ == "__main__":
         output_folder=video_output_folder,
         final_output_path=final_video_output,
         target_resolution=(1920, 1080),
-        effect_type=None  # Set to None for random selection, or specify 'zoom_in', 'zoom_out', or 'pan'
+        effect_type=None,  # Set to None for random selection, or specify 'zoom_in', 'zoom_out', or 'pan'
     )
-
 
     # Update the JSON with the video output path
     story_dict["video_output"] = final_video_output
