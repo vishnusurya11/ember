@@ -12,3 +12,4 @@ data/*
 *.wav
 *.pyc
 .env
+flash-fiction-plots-yaml.yaml

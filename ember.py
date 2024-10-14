@@ -11,16 +11,17 @@ from story_generator import (
     generate_short_script,
     improve_story,
     generate_youtube_title_description,
+    generate_story,
 )
-from prompt_generator import generate_prompts_for_sentences,split_story_into_sentences
+from prompt_generator import generate_prompts_for_sentences, split_story_into_sentences
 from audio_generator import generate_audio_from_json
 from image_generator import generate_images_for_prompts, extract_timestamp_from_path
 from video_generator import generate_and_concatenate_videos
-
+from langchain_openai import ChatOpenAI
 
 """
 TODO :
-- Fix the prompts to be specific to the audio 
+- Fix the prompts to be specific to the audio
 - change the image format
 - add a constants file
 """
@@ -31,11 +32,16 @@ if __name__ == "__main__":
     ##########################################################################
     # Start measuring the time
     start_time = time.time()
-    load_dotenv()
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = r"E:\PRODUCTION\Ember\ember\data"
-    plot_file = r"E:\PRODUCTION\Ember\ember\plots.yaml"
+    plot_file = r"E:\PRODUCTION\Ember\ember\flash-fiction-plots-yaml.yaml"
     # TODO : base folder setup function to be added to all files 
+    # base_data_folder = "E:\\Ember\\Ember\\ember\\data"
+    # # plot_file = r"E:\Ember\Ember\ember\plots.yaml"
+    # plot_file = r"E:\Ember\Ember\ember\flash-fiction-plots-yaml.yaml"
+    # TODO : base folder setup function to be added to all files
     # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     folder_name = os.path.join(base_data_folder, timestamp)
@@ -54,20 +60,25 @@ if __name__ == "__main__":
     ##########################################################################
     # Generate the initial story
     print("Generating the initial story...")
-    story = generate_short_script(input_dict)
+    # story = generate_short_script(input_dict)
+    story = generate_story(model, input_dict)
+    print(f"input_dict --> {input_dict}")
+    print(f"###############################################################")
     print(f"story --> {story}")
+    print(f"###############################################################")
     # Specify the number of improvement iterations
     iterations = 3
 
     # Improve the generated story
     print("\nImproving the story...")
-    improved_story = improve_story(story, iterations=iterations)
+    # improved_story = improve_story(story, iterations=iterations)
+    improved_story = story
     print(improved_story)
     youtube_details = generate_youtube_title_description(improved_story)
     # Create the final dictionary to save
     story_dict = {
         "story": improved_story,
-        "youtube_details" : youtube_details,
+        "youtube_details": youtube_details,
     }
 
     # Save the dictionary to a JSON file
@@ -85,11 +96,12 @@ if __name__ == "__main__":
     prompt_start_time = time.time()
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
-    story_dict["sentences"]= split_story_into_sentences(story_dict.get("story", {}))
-    # sentences_with_prompts = generate_prompts_for_sentences(
-    #     story_dict.get("sentences", {}),story_dict.get("story", {})
-    # )
-    # story_dict["sentences"] = sentences_with_prompts
+    story_dict["sentences"] = split_story_into_sentences(
+        story_dict.get("story", {}))
+    sentences_with_prompts = generate_prompts_for_sentences(
+        story_dict.get("sentences", {}), story_dict.get("story", {})
+    )
+    story_dict["sentences"] = sentences_with_prompts
 
     # Save the updated JSON file with prompts
     with open(filename, "w") as f:
@@ -121,6 +133,16 @@ if __name__ == "__main__":
     #     timestamp,
     #     3
     # )
+    # Generate images for the prompts
+    print("\nGenerating images for the prompts...")
+    generate_images_for_prompts(
+        SERVER_ADDRESS,
+        WORKFLOW_FILE,
+        SAVE_DIR,
+        story_dict.get("sentences", {}),
+        timestamp,
+        2,
+    )
 
     # # Define the final image output path
     # final_image_folder = (
@@ -182,6 +204,22 @@ if __name__ == "__main__":
     # story_dict["video_output"] = final_video_output
     # with open(filename, "w", encoding="utf-8") as f:
     #     json.dump(story_dict, f, indent=4)
+    generate_and_concatenate_videos(
+        audio_base_path=audio_folder,
+        images_base_path=final_image_folder,
+        sentences=story_dict.get("sentences", {}),
+        output_folder=video_output_folder,
+        final_output_path=final_video_output,
+        target_resolution=(1920, 1080),
+        effect_type=None,
+        # Set to None for random selection, or specify 'zoom_in', 'zoom_out',
+        # or 'pan'
+    )
+
+    # Update the JSON with the video output path
+    story_dict["video_output"] = final_video_output
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(story_dict, f, indent=4)
 
     # print(f"Final video has been generated at {final_video_output}")
     # print(f"Updated JSON with video paths saved to {filename}")

@@ -1,0 +1,7 @@
+langchain-anthropic==0.2.3
+langchain-core==0.3.10
+langchain-openai==0.2.2
+langchain-text-splitters==0.3.0
+langcodes==3.4.1
+langsmith==0.1.134
+language_data==1.2.0
