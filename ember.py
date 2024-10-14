@@ -3,7 +3,7 @@ from datetime import datetime
 import os
 import time
 from dotenv import load_dotenv
-from utils.config_helper import load_config
+from utils.config_helper import load_config, get_base_data_folder
 from utils.topic_selector import plot_selector
 import yaml
 import random
@@ -35,12 +35,13 @@ if __name__ == "__main__":
     model = ChatOpenAI(model="gpt-4o-mini")
     # load_dotenv()
     # Define the data folder path provided as input
-    base_data_folder = r"E:\PRODUCTION\Ember\ember\data"
-    plot_file = r"E:\PRODUCTION\Ember\ember\flash-fiction-plots-yaml.yaml"
+    # base_data_folder = r"E:\PRODUCTION\Ember\ember\data"
+    # plot_file = r"E:\PRODUCTION\Ember\ember\flash-fiction-plots-yaml.yaml"
     # TODO : base folder setup function to be added to all files 
     # base_data_folder = "E:\\Ember\\Ember\\ember\\data"
-    # # plot_file = r"E:\Ember\Ember\ember\plots.yaml"
+    # # # plot_file = r"E:\Ember\Ember\ember\plots.yaml"
     # plot_file = r"E:\Ember\Ember\ember\flash-fiction-plots-yaml.yaml"
+    base_data_folder, plot_file, input_mp3_path = get_base_data_folder()
     # TODO : base folder setup function to be added to all files
     # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -54,7 +55,8 @@ if __name__ == "__main__":
     input_dict = {"topic": plot_selector(plot_file)}
     # TODO - Update the input audio files folder and create a library to
     # choose from
-    input_mp3_path = r"E:\PRODUCTION\Ember\ember\sample_5.mp3" #TODO - make it dynamic
+    # input_mp3_path = r"E:\PRODUCTION\Ember\ember\sample_5.mp3" #TODO - make it dynamic
+    # input_mp3_path = r"sample_5.mp3" #TODO - make it dynamic
     ##########################################################################
     ############################### 1 - Story Generator ######################
     ##########################################################################
@@ -119,9 +121,9 @@ if __name__ == "__main__":
     image_start_time = time.time()
 
     # Server and workflow configurations for image generation
-    # SERVER_ADDRESS = "127.0.0.1:8188"
-    # WORKFLOW_FILE = "flux_dev_space_example_16.json"
-    # SAVE_DIR = folder_name
+    SERVER_ADDRESS = "127.0.0.1:8188"
+    WORKFLOW_FILE = "flux_dev_space_example_16.json"
+    SAVE_DIR = folder_name
 
     # # Generate images for the prompts
     # print("\nGenerating images for the prompts...")
@@ -141,18 +143,18 @@ if __name__ == "__main__":
         SAVE_DIR,
         story_dict.get("sentences", {}),
         timestamp,
-        2,
+        1,
     )
 
-    # # Define the final image output path
-    # final_image_folder = (
-    #     f"E:\\ComfyUI_windows_portable\\ComfyUI\\output\\api\\{timestamp}"
-    # )
-    # story_dict["images_output"] = final_image_folder
+    # Define the final image output path
+    final_image_folder = (
+        f"E:\\ComfyUI_windows_portable\\ComfyUI\\output\\api\\{timestamp}"
+    )
+    story_dict["images_output"] = final_image_folder
 
-    # # Save the final JSON file with all outputs (prompts, audio, images)
-    # with open(filename, "w", encoding="utf-8") as f:
-    #     json.dump(story_dict, f, indent=4)
+    # Save the final JSON file with all outputs (prompts, audio, images)
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(story_dict, f, indent=4)
 
     # print(f"Final JSON with all outputs saved to {filename}")
 
@@ -200,10 +202,10 @@ if __name__ == "__main__":
     # )
 
 
-    # # Update the JSON with the video output path
-    # story_dict["video_output"] = final_video_output
-    # with open(filename, "w", encoding="utf-8") as f:
-    #     json.dump(story_dict, f, indent=4)
+    # Update the JSON with the video output path
+    story_dict["video_output"] = final_video_output
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(story_dict, f, indent=4)
     generate_and_concatenate_videos(
         audio_base_path=audio_folder,
         images_base_path=final_image_folder,
@@ -221,8 +223,8 @@ if __name__ == "__main__":
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(story_dict, f, indent=4)
 
-    # print(f"Final video has been generated at {final_video_output}")
-    # print(f"Updated JSON with video paths saved to {filename}")
+    print(f"Final video has been generated at {final_video_output}")
+    print(f"Updated JSON with video paths saved to {filename}")
 
     video_end_time = time.time()
     total_video_time = video_end_time - video_start_time
