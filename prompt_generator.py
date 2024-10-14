@@ -1,7 +1,7 @@
 import os
 import json
 from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
+# from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate, FewShotChatMessagePromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 
@@ -48,20 +48,17 @@ def generate_prompts_for_sentences(sentences, story):
         # sentence
         prompt_generation = ChatPromptTemplate.from_messages(
             [
-                (
-                    "system",
-                    "You are a visual storytelling expert with 30 years of experience in crafting cinematic imagery from written descriptions. For each sentence, focus on visualizing the scene: describe the perspective, highlight 3-4 key elements that stand out, and conclude with a brief background description. Avoid using character names, instead focus on physical details and atmosphere from the story. Maintain the theme and setting of the story (e.g., space, medieval times) to ensure the prompt aligns with its context. Provide only the prompt.",
-                ),
-                (
-                    "human",
-                    f"""
+                ("system",
+                 "You are a visual storytelling expert with 30 years of experience in crafting cinematic imagery from written descriptions. For each sentence, focus on visualizing the scene: describe the perspective, highlight 3-4 key elements that stand out, and conclude with a brief background description. Avoid using character names, instead focus on physical details and atmosphere from the story. Maintain the theme and setting of the story (e.g., space, medieval times) to ensure the prompt aligns with its context. Provide only the prompt.",
+                 ),
+                ("human",
+                 f"""
                  Illustrate a watercolor scene of {sentence} set within the context of {story}. Depict a vivid environment that embodies the essence of the narrative, with detailed descriptions of the surroundings that engage the senses. Soft light filters through the setting, casting nuanced shadows and highlights that enhance the mood. {sentence} is portrayed engaging in an action that reflects their role and emotions within {story}, their expression and posture conveying depth and complexity. Surround them with elements significant to the narrative—perhaps symbolic objects, architectural details, or natural features—that enrich the scene. The atmosphere should evoke feelings of [insert emotional tone relevant to the story, e.g., wonder, tension, serenity], rendered in delicate watercolor washes that highlight intricate details and impart a dreamlike quality. Use the example below as a guide for the style and level of detail:
 
 Illustrate a watercolor scene of Thalia standing inside a grand celestial observatory, where towering telescopes reach towards a domed ceiling adorned with intricate star maps. Moonlight streams through large stained-glass windows, casting colorful patterns across the marble floors and antique furniture. Shelves filled with ancient books and celestial charts line the walls, while delicate glass orbs and celestial instruments are scattered across tables. Thalia is dressed in elegant, flowing garments that shimmer with subtle constellations, her eyes reflecting the vastness of the cosmos she studies. She holds an ornate telescope, gazing thoughtfully into the night sky depicted within the dome, as swirling galaxies and nebulae seem to come alive around her. Soft glows of light emanate from various celestial artifacts, creating an ethereal ambiance. The atmosphere is one of intellectual curiosity and awe-inspiring wonder, rendered in delicate watercolor washes that highlight the intricate details and the dreamlike quality of the observatory.
                  """,
-                ),
-            ]
-        )
+                 ),
+            ])
 
         result = prompt_generation | model | StrOutputParser()
         generated_prompt = result.invoke({"input": sentence})
@@ -73,7 +70,8 @@ Illustrate a watercolor scene of Thalia standing inside a grand celestial observ
 
 def split_story_into_sentences(story):
     # Split the story into sentences using '.'
-    sentences = [sentence.strip() for sentence in story.split(".") if sentence.strip()]
+    sentences = [sentence.strip()
+                 for sentence in story.split(".") if sentence.strip()]
 
     # Create a dictionary to store sentences with incremental keys
     sentences_dict = {}
@@ -99,12 +97,14 @@ if __name__ == "__main__":
             break
 
     if not json_file:
-        raise FileNotFoundError("No codex JSON file found in the specified directory.")
+        raise FileNotFoundError(
+            "No codex JSON file found in the specified directory.")
 
     # Load the JSON file
     with open(json_file, "r", encoding="utf-8") as file:
         story_data = json.load(file)
-    story_data["sentences"] = split_story_into_sentences(story_data.get("story", {}))
+    story_data["sentences"] = split_story_into_sentences(
+        story_data.get("story", {}))
     print("asd")
     # Generate prompts for the sentences
     sentences_with_prompts = generate_prompts_for_sentences(

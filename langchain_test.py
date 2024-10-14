@@ -43,34 +43,31 @@ negative_feedback_template = ChatPromptTemplate.from_messages(
 
 neutral_feedback_template = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are a helpful assistant."),
-        (
-            "human",
-            "Generate a request for more details for this neutral feedback: {feedback}.",
-        ),
-    ]
-)
+        ("system",
+         "You are a helpful assistant."),
+        ("human",
+         "Generate a request for more details for this neutral feedback: {feedback}.",
+         ),
+    ])
 
 escalate_feedback_template = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are a helpful assistant."),
-        (
-            "human",
-            "Generate a message to escalate this feedback to a human agent: {feedback}.",
-        ),
-    ]
-)
+        ("system",
+         "You are a helpful assistant."),
+        ("human",
+         "Generate a message to escalate this feedback to a human agent: {feedback}.",
+         ),
+    ])
 
 # Define the feedback classification template
 classification_template = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are a helpful assistant."),
-        (
-            "human",
-            "Classify the sentiment of this feedback as positive, negative, neutral, or escalate: {feedback}.",
-        ),
-    ]
-)
+        ("system",
+         "You are a helpful assistant."),
+        ("human",
+         "Classify the sentiment of this feedback as positive, negative, neutral, or escalate: {feedback}.",
+         ),
+    ])
 
 # Define the runnable branches for handling feedback
 branches = RunnableBranch(
@@ -102,7 +99,8 @@ review = (
     "The product is terrible. It broke after just one use and the quality is very poor."
 )
 
-print(f" classification_chain --> {classification_chain.invoke({'feedback': review})}")
+print(
+    f" classification_chain --> {classification_chain.invoke({'feedback': review})}")
 print("############################################################")
 # Combine classification and response generation into one chain
 chain = classification_chain | branches

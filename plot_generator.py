@@ -174,34 +174,34 @@ def generate_story(model, input_dict):
              f"""
              You are a writer with 40 years of experience in writing short stories and have won many awards like Mary Robinette.
 
-I will provide you with a topic for a flash fiction story. Your task is to:
+Story Structure: Utilize the MICE Quotient (Milieu, Inquiry, Character, Event) to structure your story. You may combine multiple elements and nest them appropriately by opening and closing threads in sequence (e.g., open Milieu <M>, then Inquiry <I>, and close in reverse </I></M>).
 
-Use the MICE Quotient (Milieu, Inquiry, Character, Event) to structure the story. You can select one or two overarching MICE threads that will drive the narrative based on the topic. Provide 3-5 sub MICE threads that contribute to the resolution of the main story threads. These subthreads can represent smaller obstacles or moments of discovery.
+Opening: In the first three sentences, establish:
 
-Apply the Try-Fail cycle: The protagonist should attempt to resolve the conflict and encounter obstacles along the way. Do not explicitly include "Yes, But" or "No, And" in the story—the progress and setbacks should feel natural and immersive. The focus should be on raising tension through failures and partial successes without giving away the underlying structure.
+Who: Introduce the main character through action, highlighting their attitude or a defining trait.
+Where: Set the scene using a sensory detail to ground the reader.
+Genre: Include a genre-specific detail to orient the reader.
+Conflict Introduction:
 
-Introduction and Setup: In the first few sentences, establish:
+Goal: Clearly state what the character is trying to achieve and why it matters to them.
+Obstacle: Introduce what is preventing them from reaching their goal.
+Try-Fail Cycles:
 
-Who: Introduce the protagonist through their actions or attitude.
-Where: Ground the reader in the setting with a sensory detail.
-Genre: Establish the genre by including a specific and unique detail that ties to the topic (e.g., sci-fi, fantasy, thriller).
-Conflict and Motivation: Introduce the goal of the protagonist and the obstacle stopping them from achieving it. Make sure the character's motivation is clear, and the stakes are high.
+Incorporate at least one try-fail cycle where the character attempts to overcome the obstacle and fails, making the situation worse.
+Use "Yes, but" or "No, and" structures to escalate tension and complicate the character's efforts.
+Resolution:
 
-Try-Fail Cycles: In the middle section of the story, show the character making progress toward the goal while facing complications and failures. These challenges should naturally raise the stakes and lead toward the final resolution.
+Transition to a try-succeed cycle where the character finally overcomes the obstacle.
+Use "Yes, and" or "No, but" structures to move toward resolution and show progress.
+Ending:
 
-Resolution: End the story by resolving the conflict. Close out the opened MICE threads in reverse order and mirror the opening elements to ground the reader emotionally and thematically. The resolution should feel seamless and satisfying.
+Close out the MICE elements you opened, mirroring the opening.
+Re-establish the Who, Where, and Genre/Mood, showing how things have changed.
+Provide a satisfying conclusion that delivers a specific emotional impact.
+Character and Setting Limitations:
 
-Do not include any subheadings or labels such as "Yes, But" or "No, And." The story should be written as a continuous narrative without breaking the immersion.
-
-Word Limit: There is no word limit for this story. However, you should limit it to no more than two characters and one location to maintain focus and brevity.
-
-Example Input:
-Topic: "A renowned surgeon must perform a groundbreaking operation they've never attempted before. They have only 12 hours to prepare, or their patient will die, putting their career and reputation on the line."
-
-Expected Output:
-The final story should be written without subheadings or any explicit structural cues like "Yes, But" or "No, And." The flow of the story should feel natural, with rising tension and challenges, leading to a resolution that satisfies the main conflict and resolves the MICE threads.
-
-
+Limit the story to no more than two characters and one location to maintain focus and brevity.
+Instructions:
 
 Use the topic provided ({input_dict['topic']}) to craft your story.
 Ensure that your story follows the MICE Quotient structure, opening and closing threads appropriately.
@@ -215,13 +215,23 @@ Focus on delivering a specific emotional experience through the story.
     return result.invoke({"input_dict": input_dict})
 
 
+
+
+
+
+def generate_plot(model):
+
+    return True
+
+
+
 if __name__ == "__main__":
     # Initial story generation
     model = ChatOpenAI(model="gpt-4o-mini")
     # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
     iteration_needed = 2
     input_dict = {
-        "topic": "'The Hereditary Hack': A second-generation cybercriminal discovers her legendary parents' last heist is still running in the background of the internet. What world-changing secret is lurking in the code, and why did they hide it from her?"
+        "topic": "A renowned surgeon must perform a groundbreaking operation they've never attempted before. They have only 12 hours to prepare, or their patient will die, putting their career and reputation on the line."
     }
     story = generate_story(model, input_dict)
     print(f"story ---> {story}")

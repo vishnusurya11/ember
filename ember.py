@@ -21,7 +21,7 @@ from langchain_openai import ChatOpenAI
 
 """
 TODO :
-- Fix the prompts to be specific to the audio 
+- Fix the prompts to be specific to the audio
 - change the image format
 - add a constants file
 """
@@ -36,7 +36,8 @@ if __name__ == "__main__":
     # load_dotenv()
     # Define the data folder path provided as input
     base_data_folder = "E:\\Ember\\Ember\\ember\\data"
-    plot_file = r"E:\Ember\Ember\ember\plots.yaml"
+    # plot_file = r"E:\Ember\Ember\ember\plots.yaml"
+    plot_file = r"E:\Ember\Ember\ember\flash-fiction-plots-yaml.yaml"
     # TODO : base folder setup function to be added to all files
     # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -58,7 +59,10 @@ if __name__ == "__main__":
     print("Generating the initial story...")
     # story = generate_short_script(input_dict)
     story = generate_story(model, input_dict)
+    print(f"input_dict --> {input_dict}")
+    print(f"###############################################################")
     print(f"story --> {story}")
+    print(f"###############################################################")
     # Specify the number of improvement iterations
     iterations = 3
 
@@ -89,7 +93,8 @@ if __name__ == "__main__":
     prompt_start_time = time.time()
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
-    story_dict["sentences"] = split_story_into_sentences(story_dict.get("story", {}))
+    story_dict["sentences"] = split_story_into_sentences(
+        story_dict.get("story", {}))
     sentences_with_prompts = generate_prompts_for_sentences(
         story_dict.get("sentences", {}), story_dict.get("story", {})
     )
@@ -147,7 +152,8 @@ if __name__ == "__main__":
     audio_start_time = time.time()
     # Call the audio generation function using the folder path
 
-    wav_path, mp3_path = generate_audio_from_json(folder_name, input_mp3=input_mp3_path)
+    wav_path, mp3_path = generate_audio_from_json(
+        folder_name, input_mp3=input_mp3_path)
 
     # Update the JSON file with the audio output path
     story_dict["audio_output"] = mp3_path
@@ -176,7 +182,9 @@ if __name__ == "__main__":
         output_folder=video_output_folder,
         final_output_path=final_video_output,
         target_resolution=(1920, 1080),
-        effect_type=None,  # Set to None for random selection, or specify 'zoom_in', 'zoom_out', or 'pan'
+        effect_type=None,
+        # Set to None for random selection, or specify 'zoom_in', 'zoom_out',
+        # or 'pan'
     )
 
     # Update the JSON with the video output path

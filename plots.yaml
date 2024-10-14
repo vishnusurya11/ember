@@ -60,9 +60,6 @@ unused_plots:
   16: '''The Pandora Stream'': A streaming service shows ''what if'' scenarios of
     users'' lives. As people become addicted to alternate realities, a therapist discovers
     the service is stealing possibilities from real lives.'
-  17: "'The Antiquarians' War': Time-traveling collectors battle across history for\
-    \ wealthy patrons. When a rare item threatens to unravel time, enemies must cooperate\
-    \ to save history\xE2\u20AC\u201Dand their business."
   18: '''The Cybernetic Seminole'': In a flooded future Florida, a Seminole descendant
     fuses ancient traditions with scavenged tech. Her innovations might reverse climate
     change, but she must defend them from exploiters.'
@@ -108,9 +105,6 @@ unused_plots:
   33: '''The Perception Filters'': Augmented Reality filters begin altering real-world
     perceptions. As society fragments into bespoke realities, a cultural anthropologist
     searches for objective truth.'
-  34: '''The Emotional Contagion'': Empaths can spread and manipulate emotions like
-    viruses. During a pandemic of despair, an emotional epidemiologist must find patient
-    zero: the world''s most depressed person.'
   35: '''The Quantum Pharaohs'': Egyptologists discover the pyramids are quantum computers
     preserving pharaohs'' consciousness. As modern leaders upload their minds, an
     archaeologist races to unlock the ancient fail-safe.'
@@ -120,9 +114,6 @@ unused_plots:
   37: '''The Jungian Shadows'': A Jungian spiritualist accidentally makes the collective
     unconscious shadow manifest in reality. As humanity''s repressed darkness runs
     rampant, she scrambles to integrate the shadow before ego-death.'
-  38: '''The Ideasthesia Revolution'': People develop the ability to experience ideas
-    as sensations. As abstract thinking becomes overwhelming, a neurodivergent individual
-    who has always perceived the world this way becomes humanity''s reluctant guide.'
   39: '''The Quantum Entangled'': Lovers become quantum entangled, their fates inextricably
     linked across any distance. A scientist races to disentangle her partner from
     a doppelganger before their competing wave functions collapse.'
@@ -141,9 +132,6 @@ unused_plots:
   44: '''The Quantum Oni'': Japanese demons, or oni, are discovered to be quantum
     phenomena, appearing when observed with fear. A Shinto priest and quantum physicist
     team up to calm the nation''s collective fear before the oni overrun reality.'
-  45: '''The Memetic Magic'': Internet memes are found to have reality-warping properties
-    based on viral spread. Meme lords become modern sorcerers, and a disillusioned
-    blogger finds herself the reluctant chosen one of an ancient prophecy.'
   46: '''The Holographic Homunculi'': Scientists create miniature holographic humans
     for computational purposes. When the holograms develop sentience and demand rights,
     a human rights lawyer must argue for the personhood of artificial beings.'
@@ -151,9 +139,6 @@ unused_plots:
     animals to life when read aloud. As mythical beasts run rampant, she must find
     a way to close the book without destroying the wondrous creatures she''s longed
     to see.'
-  48: '''The Neuro-Linguistic Ninjas'': Martial artists develop techniques to reprogram
-    minds through perfectly constructed sentences. As language becomes a weapon, a
-    stuttering linguist may be the world''s only hope for peace.'
   49: '''The Quantum Quetzalcoatl'': The Aztec god Quetzalcoatl returns, revealed
     to be a transdimensional being. As it demands sacrifice for interdimensional travel
     technology, a Mexican archaeologist must decipher whether to embrace or banish
@@ -467,9 +452,6 @@ unused_plots:
   139: '''The Empathy Plague'': A pandemic causes people to uncontrollably experience
     the emotions of others around them. Can an emotional ''immune'' person find the
     cure before society collapses?'
-  140: '''The Chrono-Archaeologists'': Scientists discover a way to excavate time
-    instead of earth, uncovering lost moments in history. What happens when they dig
-    too deep and unearth a history-altering secret?'
   141: '''The Karma Mechanics'': In a world where karma is quantifiable and adjustable,
     what happens when someone finds a way to game the system?'
   142: '''The Whisper Market'': In a society where secrets are the most valuable currency,
@@ -523,3 +505,21 @@ used_plots:
 - 27: '''The Ancestral Download'': A tech company offers to download ancestors'' memories
     into clients'' minds. When forgotten generational trauma and skills surface, society
     transforms unpredictably.'
+- 17: "'The Antiquarians' War': Time-traveling collectors battle across history for\
+    \ wealthy patrons. When a rare item threatens to unravel time, enemies must cooperate\
+    \ to save history\xE2\u20AC\u201Dand their business."
+- 45: '''The Memetic Magic'': Internet memes are found to have reality-warping properties
+    based on viral spread. Meme lords become modern sorcerers, and a disillusioned
+    blogger finds herself the reluctant chosen one of an ancient prophecy.'
+- 38: '''The Ideasthesia Revolution'': People develop the ability to experience ideas
+    as sensations. As abstract thinking becomes overwhelming, a neurodivergent individual
+    who has always perceived the world this way becomes humanity''s reluctant guide.'
+- 48: '''The Neuro-Linguistic Ninjas'': Martial artists develop techniques to reprogram
+    minds through perfectly constructed sentences. As language becomes a weapon, a
+    stuttering linguist may be the world''s only hope for peace.'
+- 34: '''The Emotional Contagion'': Empaths can spread and manipulate emotions like
+    viruses. During a pandemic of despair, an emotional epidemiologist must find patient
+    zero: the world''s most depressed person.'
+- 140: '''The Chrono-Archaeologists'': Scientists discover a way to excavate time
+    instead of earth, uncovering lost moments in history. What happens when they dig
+    too deep and unearth a history-altering secret?'

@@ -4,7 +4,12 @@ import os
 import pytest
 
 # Add the parent directory to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.insert(
+    0,
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..")))
 
 
 @pytest.fixture
@@ -22,7 +27,8 @@ def test_create_folders_if_not_exist_creates_folders(temp_directory):
         assert (temp_directory / folder).exists()
 
 
-def test_create_folders_if_not_exist_does_not_create_existing_folders(temp_directory):
+def test_create_folders_if_not_exist_does_not_create_existing_folders(
+        temp_directory):
     folders_to_create = ["folder1", "folder2"]
     # Create folders first
     for folder in folders_to_create:

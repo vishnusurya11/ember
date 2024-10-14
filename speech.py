@@ -109,8 +109,8 @@ os.makedirs(audiolist_folder, exist_ok=True)
 
 # Split the text by sentences
 sentences = [
-    sentence.strip() + "." for sentence in text_input.split(".") if sentence.strip()
-]
+    sentence.strip() +
+    "." for sentence in text_input.split(".") if sentence.strip()]
 
 length_sen = len(sentences)
 
@@ -121,8 +121,10 @@ for i, sentence in enumerate(sentences):
     # tts = TTS("tts_models/multilingual/multi-dataset/bark").to(device)
     wav = tts.tts(text=sentence, speaker_wav=sample_input, language="en")
     tts.tts_to_file(
-        text=sentence, speaker_wav=sample_input, language="en", file_path=file_path
-    )
+        text=sentence,
+        speaker_wav=sample_input,
+        language="en",
+        file_path=file_path)
     print(f"Generated audio for sentence {i+1}/{length_sen}")
 
 # Combine audio files
