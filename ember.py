@@ -13,9 +13,9 @@ from story_generator import (
     generate_youtube_title_description,
     generate_story,
 )
-from prompt_generator import generate_prompts_for_sentences, split_story_into_sentences
+from prompt_generator import generate_prompts_for_sentences, split_story_into_sentences, generate_thumbnail_prompt
 from audio_generator import generate_audio_from_json
-from image_generator import generate_images_for_prompts, extract_timestamp_from_path
+from image_generator import generate_images_for_prompts, extract_timestamp_from_path, generate_thumbnail
 from video_generator import generate_and_concatenate_videos
 from langchain_openai import ChatOpenAI
 
@@ -105,6 +105,9 @@ if __name__ == "__main__":
     )
     story_dict["sentences"] = sentences_with_prompts
 
+     # Create thumbnail Prompt
+    story_dict["youtube_details"]["thumbnail_prompt"] = generate_thumbnail_prompt(story_dict["youtube_details"]["youtube_title"], story_dict.get("story", {}))
+    
     # Save the updated JSON file with prompts
     with open(filename, "w") as f:
         json.dump(story_dict, f, indent=4)
@@ -137,6 +140,16 @@ if __name__ == "__main__":
     # )
     # Generate images for the prompts
     print("\nGenerating images for the prompts...")
+    
+    generate_thumbnail(
+        SERVER_ADDRESS,
+        WORKFLOW_FILE,
+        SAVE_DIR,
+        story_dict["youtube_details"]["thumbnail_prompt"],
+        timestamp,
+        3,
+    )
+
     generate_images_for_prompts(
         SERVER_ADDRESS,
         WORKFLOW_FILE,
@@ -145,6 +158,8 @@ if __name__ == "__main__":
         timestamp,
         1,
     )
+
+
 
     # Define the final image output path
     final_image_folder = (

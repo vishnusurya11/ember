@@ -58,9 +58,51 @@ def generate_images_for_prompts(
     return sentences
 
 
+def generate_thumbnail(
+        server_address,
+        workflow_file,
+        save_dir,
+        thumbnail_prompt,
+        timestamp,
+        num_iterations=3):
+    generator = ImageGenerator(server_address, workflow_file)
+
+    # images_folder = os.path.join(save_dir, "images")
+    # os.makedirs(images_folder, exist_ok=True)
+
+ 
+    for i in range(num_iterations):
+        time.sleep(5)  # Add a sleep delay between iterations
+        seed = random.randint(1, 999999999999999)
+
+        api_prefix = f"api/{timestamp}/thumbnail/{i+1:02}"
+
+        updates = {
+            "6": {
+                "text": thumbnail_prompt,
+            },
+            "25": {
+                "noise_seed": seed,
+            },
+            "41": {
+                "filename_prefix": f"{api_prefix}_hires/",
+            },
+            "9": {
+                "filename_prefix": f"{api_prefix}_facefix/",
+            },
+            "38": {
+                "lora_name": "flux\\flux_realisim_hf.safetensors",
+            },
+        }
+
+        generator.generate_images(save_dir, updates=updates)
+
+    return True
+
+
 if __name__ == "__main__":
     # High-level path provided
-    base_folder = r"E:\Ember\Ember\ember\data\20240904192910"
+    base_folder = r"E:\Ember\Ember\ember\data\20241013142553"
     num_iterations = 3
     # Extract the timestamp from the base folder path
     timestamp = extract_timestamp_from_path(base_folder)
@@ -85,6 +127,16 @@ if __name__ == "__main__":
     WORKFLOW_FILE = "flux_dev_space_example_16.json"
     SAVE_DIR = base_folder
 
+    # generate thumbnail
+    generate_thumbnail(
+        SERVER_ADDRESS,
+        WORKFLOW_FILE,
+        SAVE_DIR,
+        story_data["youtube_details"]["thumbnail_prompt"],
+        timestamp,
+        num_iterations,
+    )
+
     # Generate images for the prompts
     generate_images_for_prompts(
         SERVER_ADDRESS,
@@ -94,6 +146,7 @@ if __name__ == "__main__":
         timestamp,
         num_iterations,
     )
+    
 
     # Define the final image output path
     final_image_folder = (

@@ -68,6 +68,36 @@ Illustrate a watercolor scene of Thalia standing inside a grand celestial observ
     return sentences
 
 
+
+def generate_thumbnail_prompt(youtube_title, story):
+    # Create a ChatOpenAI model
+    model = ChatOpenAI(model="gpt-4o-mini")
+    # Iterate through sentences and generate prompts
+ 
+    prompt_generation = ChatPromptTemplate.from_messages(
+        [
+            ("system",
+                """You are a visual storytelling expert with 30 years of experience in crafting cinematic imagery from written descriptions. For each image you create, focus on visualizing the scene in a way that captures the essence of the story. Describe the perspective with dynamic angles, highlight 3-4 key elements that stand out visually, and conclude with a brief background description that enhances the atmosphere. Avoid using character names and instead emphasize physical details, expressions, and the overall mood. Maintain the theme and setting of the story (e.g., futuristic world, ancient landscapes) to ensure the imagery aligns with the tone and context.
+Provide only the prompt.""",
+                ),
+            ("human",
+                f"""Illustrate a watercolor scene of "{youtube_title}" set in the context of "{story}." Capture the vivid environment with soft light filtering through, casting gentle shadows. The central figure is shown in action, their expression revealing emotional depth. Surround them with symbolic elements from the story—nature, architecture, or objects that add context.
+
+The mood should evoke [insert emotional tone], with delicate watercolor washes creating a dreamlike atmosphere. The YouTube title "{youtube_title}" should be bold and prominently displayed, seamlessly integrated into the poster without overpowering the image. The title should be enclosed between [] so image generator knows that is the title. Keep th eprompt less than 100 words
+
+Example: Illustrate a watercolor scene of The poet stands in a glowing forest, surrounded by bioluminescent trees. He reaches for swirling words escaping his parchment, desperation etched on his face. The atmosphere is tense, with soft, glowing shadows. The title ["The Poet's Last Chance to Save Veloria"] is displayed prominently in a bold, cinematic font at the top, integrated into the mystical scene.
+
+""",
+                ),
+        ])
+
+    result = prompt_generation | model | StrOutputParser()
+    generated_prompt = result.invoke({"input": youtube_title})
+
+
+    return generated_prompt
+
+
 def split_story_into_sentences(story):
     # Split the story into sentences using '.'
     sentences = [sentence.strip()
@@ -87,7 +117,7 @@ def split_story_into_sentences(story):
 # Main logic
 if __name__ == "__main__":
     # High-level path provided
-    base_folder = r"E:\Ember\Ember\ember\data\20240904192910"
+    base_folder = r"E:\Ember\Ember\ember\data\20241013142553"
 
     # Find the JSON file that starts with "codex" in the provided directory
     json_file = None
@@ -106,6 +136,11 @@ if __name__ == "__main__":
     story_data["sentences"] = split_story_into_sentences(
         story_data.get("story", {}))
     print("asd")
+
+     # Create thumbnail Prompt
+    story_data["youtube_details"]["thumbnail_prompt"] = generate_thumbnail_prompt(story_data["youtube_details"]["youtube_title"], story_data.get("story", {}))
+    print(f'prompt --> {story_data["youtube_details"]["thumbnail_prompt"]}')
+
     # Generate prompts for the sentences
     sentences_with_prompts = generate_prompts_for_sentences(
         story_data.get("sentences", {}), story_data.get("story", {})
@@ -114,6 +149,7 @@ if __name__ == "__main__":
     # Update the story_data with the new prompts
     story_data["sentences"] = sentences_with_prompts
 
+   
     # Save the updated JSON file
     with open(json_file, "w", encoding="utf-8") as file:
         json.dump(story_data, file, indent=4)
