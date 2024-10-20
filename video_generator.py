@@ -76,8 +76,9 @@ def create_video_for_sentence(
     effect_ratio=0.06,
 ):
     # Get all images in the folder that contain 'facefix' in the name
-    images = [f for f in os.listdir(
-        image_folder) if "facefix" in f and f.endswith(".png")]
+    images = [
+        f for f in os.listdir(image_folder) if "facefix" in f and f.endswith(".png")
+    ]
 
     if not images:
         raise FileNotFoundError(f"No 'facefix' images found in {image_folder}")
@@ -102,16 +103,12 @@ def create_video_for_sentence(
     if effect_type == "zoom_in":
         effected_clip = zoom_effect(image_clip, effect_ratio)
     elif effect_type == "zoom_out":
-        effected_clip = zoom_effect(
-            image_clip,
-            effect_ratio).fx(
-            mp.vfx.time_mirror)
+        effected_clip = zoom_effect(image_clip, effect_ratio).fx(mp.vfx.time_mirror)
     elif effect_type == "pan":
         direction = random.choice(["left", "right", "up", "down"])
         effected_clip = pan_effect(image_clip, effect_ratio, direction)
     else:
-        raise ValueError(
-            "effect_type must be 'zoom_in', 'zoom_out', 'pan', or None")
+        raise ValueError("effect_type must be 'zoom_in', 'zoom_out', 'pan', or None")
 
     # Combine video and audio
     final_clip = effected_clip.set_audio(audio_clip)
@@ -132,8 +129,7 @@ def generate_and_concatenate_videos(
     os.makedirs(output_folder, exist_ok=True)
     video_clips = []
 
-    for key, value in tqdm(sentences.items(),
-                           desc="Generating Videos for Sentences"):
+    for key, value in tqdm(sentences.items(), desc="Generating Videos for Sentences"):
         audio_file = os.path.join(audio_base_path, f"{key}.wav")
         image_folder = os.path.join(images_base_path, key)
 
@@ -149,11 +145,8 @@ def generate_and_concatenate_videos(
 
         try:
             create_video_for_sentence(
-                audio_file,
-                image_folder,
-                output_video,
-                target_resolution,
-                effect_type)
+                audio_file, image_folder, output_video, target_resolution, effect_type
+            )
             video_clips.append(mp.VideoFileClip(output_video))
         except Exception as e:
             print(f"Failed to create video for {key}: {e}")
@@ -168,9 +161,7 @@ if __name__ == "__main__":
     base_folder = r"E:\Ember\Ember\ember\data\20240904192910"
 
     # Load the story config to get the images_output_folder
-    json_file = os.path.join(
-        base_folder,
-        f"codex_{os.path.basename(base_folder)}.json")
+    json_file = os.path.join(base_folder, f"codex_{os.path.basename(base_folder)}.json")
     with open(json_file, "r", encoding="utf-8") as file:
         story_data = json.load(file)
 
@@ -180,8 +171,7 @@ if __name__ == "__main__":
     final_video_output = os.path.join(base_folder, "final_story.mp4")
 
     if not images_output_folder:
-        raise ValueError(
-            "images_output field not found in the JSON configuration.")
+        raise ValueError("images_output field not found in the JSON configuration.")
 
     # Generate videos for each sentence and concatenate them into a final video
     generate_and_concatenate_videos(

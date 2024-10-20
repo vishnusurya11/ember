@@ -1,6 +1,7 @@
 import yaml
 import os
 
+
 def load_config(config_path: str):
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
@@ -14,7 +15,7 @@ def get_base_data_folder():
     cwd = os.getcwd()
 
     # If 'PROD' is in the current working directory, use the production base folder
-    if 'PROD' in cwd:
+    if "PROD" in cwd:
         base_data_folder = r"E:\PRODUCTION\Ember\ember\data"
         plot_file = r"E:\PRODUCTION\Ember\ember\flash-fiction-plots-yaml.yaml"
         input_mp3_path = r"E:\PRODUCTION\Ember\ember\sample_5.mp3"

@@ -30,6 +30,7 @@
 import random
 import yaml
 
+
 def plot_selector(yaml_file):
     # Read the YAML file
     with open(yaml_file, "r", encoding="utf-8") as file:

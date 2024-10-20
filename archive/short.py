@@ -46,11 +46,7 @@ def ensure_aspect_ratio(clip, target_aspect_ratio=(9, 16)):
         new_h = iw * target_h / target_w
 
     # Center crop the video to the new dimensions
-    clip = clip.crop(
-        width=new_w,
-        height=new_h,
-        x_center=iw / 2,
-        y_center=ih / 2)
+    clip = clip.crop(width=new_w, height=new_h, x_center=iw / 2, y_center=ih / 2)
     return clip
 
 
@@ -68,8 +64,7 @@ def create_video_template(template):
     final_clip = concatenate_videoclips(clips, method="compose")
 
     # Add audio and set the final video length to match the audio length
-    if "input_audio_file" in template and os.path.exists(
-            template["input_audio_file"]):
+    if "input_audio_file" in template and os.path.exists(template["input_audio_file"]):
         audio_clip = AudioFileClip(template["input_audio_file"])
         final_clip = final_clip.set_audio(audio_clip)
         final_clip = final_clip.set_duration(audio_clip.duration)
@@ -79,10 +74,7 @@ def create_video_template(template):
         final_clip = add_subtitles(final_clip, template["subtitles"])
 
     # Write the result to a file
-    final_clip.write_videofile(
-        template["output_video_file"],
-        codec="libx264",
-        fps=24)
+    final_clip.write_videofile(template["output_video_file"], codec="libx264", fps=24)
 
 
 if __name__ == "__main__":

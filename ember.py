@@ -12,18 +12,52 @@ from story_generator import (
     improve_story,
     generate_youtube_title_description,
     generate_story,
+    get_story_elements,
 )
-from prompt_generator import generate_prompts_for_sentences, split_story_into_sentences, generate_thumbnail_prompt
+from prompt_generator import (
+    generate_prompts_for_sentences,
+    split_story_into_sentences,
+    generate_thumbnail_prompt,
+    generate_context_for_sentences,
+)
 from audio_generator import generate_audio_from_json
-from image_generator import generate_images_for_prompts, extract_timestamp_from_path, generate_thumbnail
+from image_generator import (
+    generate_images_for_prompts,
+    extract_timestamp_from_path,
+    generate_thumbnail,
+)
 from video_generator import generate_and_concatenate_videos
 from langchain_openai import ChatOpenAI
 
 """
-TODO :
-- Fix the prompts to be specific to the audio
-- change the image format
-- add a constants file
+TODO : 
+Overall :
+ - Add new models
+ - Add council of Ricks
+1. Story generator
+ - define character,locations
+ - Better name generators
+ - identify the locations
+ - Better titile and description for youtube
+ - Better story strcuture and generation
+2. Prompt generator
+ - Update the story prompts to be more consistent using character and location descriptions
+ - Update thumbnail to be more cinematic and postery
+ - constant style
+3. Image generator
+ - create better workflows
+ - Use better models
+ - HD
+4. Audio generator
+ - Use F5 TTS
+ - Use audiogen to generate sounds
+ - Use vocies per characetr
+5. Video generator
+ - Add more movements
+
+Planned:
+6. Publicity
+7. Final Youtube/Social Media deployment
 """
 
 if __name__ == "__main__":
@@ -37,7 +71,7 @@ if __name__ == "__main__":
     # Define the data folder path provided as input
     # base_data_folder = r"E:\PRODUCTION\Ember\ember\data"
     # plot_file = r"E:\PRODUCTION\Ember\ember\flash-fiction-plots-yaml.yaml"
-    # TODO : base folder setup function to be added to all files 
+    # TODO : base folder setup function to be added to all files
     # base_data_folder = "E:\\Ember\\Ember\\ember\\data"
     # # # plot_file = r"E:\Ember\Ember\ember\plots.yaml"
     # plot_file = r"E:\Ember\Ember\ember\flash-fiction-plots-yaml.yaml"
@@ -77,9 +111,11 @@ if __name__ == "__main__":
     improved_story = story
     print(improved_story)
     youtube_details = generate_youtube_title_description(improved_story)
+    story_elements = get_story_elements(improved_story)
     # Create the final dictionary to save
     story_dict = {
         "story": improved_story,
+        "story_elements": story_elements,
         "youtube_details": youtube_details,
     }
 
@@ -98,16 +134,24 @@ if __name__ == "__main__":
     prompt_start_time = time.time()
     # Generate prompts for the sentences
     print("\nGenerating prompts for each sentence...")
-    story_dict["sentences"] = split_story_into_sentences(
-        story_dict.get("story", {}))
-    sentences_with_prompts = generate_prompts_for_sentences(
-        story_dict.get("sentences", {}), story_dict.get("story", {})
+    story_dict["sentences"] = split_story_into_sentences(story_dict.get("story", {}))
+
+    sentences_with_context = generate_context_for_sentences(
+        story_dict.get("sentences", {}), story_dict.get("story", {}), story_dict["story_elements"]
     )
+
+    # Generate prompts for the sentences
+    sentences_with_prompts = generate_prompts_for_sentences(
+        sentences_with_context, story_dict.get("story", {}), story_dict["story_elements"]
+    )
+
     story_dict["sentences"] = sentences_with_prompts
 
-     # Create thumbnail Prompt
-    story_dict["youtube_details"]["thumbnail_prompt"] = generate_thumbnail_prompt(story_dict["youtube_details"]["youtube_title"], story_dict.get("story", {}))
-    
+    # Create thumbnail Prompt
+    story_dict["youtube_details"]["thumbnail_prompt"] = generate_thumbnail_prompt(
+        story_dict["youtube_details"]["youtube_title"], story_dict.get("story", {}), story_dict["story_elements"]
+    )
+
     # Save the updated JSON file with prompts
     with open(filename, "w") as f:
         json.dump(story_dict, f, indent=4)
@@ -140,7 +184,7 @@ if __name__ == "__main__":
     # )
     # Generate images for the prompts
     print("\nGenerating images for the prompts...")
-    
+
     generate_thumbnail(
         SERVER_ADDRESS,
         WORKFLOW_FILE,
@@ -158,8 +202,6 @@ if __name__ == "__main__":
         timestamp,
         2,
     )
-
-
 
     # Define the final image output path
     final_image_folder = (
@@ -182,8 +224,7 @@ if __name__ == "__main__":
     audio_start_time = time.time()
     # Call the audio generation function using the folder path
 
-    wav_path, mp3_path = generate_audio_from_json(
-        folder_name, input_mp3=input_mp3_path)
+    wav_path, mp3_path = generate_audio_from_json(folder_name, input_mp3=input_mp3_path)
 
     # Update the JSON file with the audio output path
     story_dict["audio_output"] = mp3_path
@@ -205,7 +246,6 @@ if __name__ == "__main__":
     final_video_output = os.path.join(folder_name, "final_story.mp4")
     audio_folder = os.path.join(folder_name, "verba")
 
-
     # generate_and_concatenate_videos(
     #     audio_base_path=audio_folder,
     #     images_base_path=final_image_folder,
@@ -215,7 +255,6 @@ if __name__ == "__main__":
     #     target_resolution=(1920, 1080),
     #     effect_type=None  # Set to None for random selection, or specify 'zoom_in', 'zoom_out', or 'pan'
     # )
-
 
     # Update the JSON with the video output path
     story_dict["video_output"] = final_video_output

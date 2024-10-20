@@ -18,16 +18,12 @@ class ImageGenerator:
     def queue_prompt(self, prompt):
         p = {"prompt": prompt, "client_id": self.client_id}
         data = json.dumps(p).encode("utf-8")
-        req = urllib.request.Request(
-            f"http://{self.server_address}/prompt", data=data)
+        req = urllib.request.Request(f"http://{self.server_address}/prompt", data=data)
         with urllib.request.urlopen(req) as response:
             return json.loads(response.read())
 
     def get_image(self, filename, subfolder, folder_type):
-        data = {
-            "filename": filename,
-            "subfolder": subfolder,
-            "type": folder_type}
+        data = {"filename": filename, "subfolder": subfolder, "type": folder_type}
         url_values = urllib.parse.urlencode(data)
         with urllib.request.urlopen(
             f"http://{self.server_address}/view?{url_values}"
