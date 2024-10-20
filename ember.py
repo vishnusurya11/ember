@@ -156,7 +156,7 @@ if __name__ == "__main__":
         SAVE_DIR,
         story_dict.get("sentences", {}),
         timestamp,
-        1,
+        2,
     )
 
 
