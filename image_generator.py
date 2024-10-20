@@ -70,7 +70,7 @@ def generate_thumbnail(
     # images_folder = os.path.join(save_dir, "images")
     # os.makedirs(images_folder, exist_ok=True)
 
- 
+    print(f"thumbnail_prompt -> {thumbnail_prompt}")
     for i in range(num_iterations):
         time.sleep(5)  # Add a sleep delay between iterations
         seed = random.randint(1, 999999999999999)
@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
     # Server and workflow configurations
     SERVER_ADDRESS = "127.0.0.1:8188"
-    WORKFLOW_FILE = "flux_dev_space_example_16.json"
+    WORKFLOW_FILE = "flux_dev_space_example_16_updated.json"
     SAVE_DIR = base_folder
 
     # generate thumbnail
