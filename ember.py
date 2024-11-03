@@ -118,6 +118,7 @@ if __name__ == "__main__":
         "story": improved_story,
         "story_elements": story_elements,
         "youtube_details": youtube_details,
+        "audio_used":input_mp3_path,
     }
 
     # Save the dictionary to a JSON file
