@@ -169,7 +169,6 @@ if __name__ == "__main__":
     with open(json_file, "r", encoding="utf-8") as file:
         story_data = json.load(file)
     story_data["sentences"] = split_story_into_sentences(story_data.get("story", {}))
-    print("asd")
 
     # Create thumbnail Prompt
     story_data["youtube_details"]["thumbnail_prompt"] = generate_thumbnail_prompt(
@@ -192,6 +191,6 @@ if __name__ == "__main__":
 
     # Save the updated JSON file
     with open(json_file, "w", encoding="utf-8") as file:
-        json.dump(story_data, file, indent=4)
+        json.dump(story_data, file, ensure_ascii=False,indent=4)
 
     print(f"Updated JSON saved to {json_file}")

@@ -76,6 +76,7 @@ if __name__ == "__main__":
     # # # plot_file = r"E:\Ember\Ember\ember\plots.yaml"
     # plot_file = r"E:\Ember\Ember\ember\flash-fiction-plots-yaml.yaml"
     base_data_folder, plot_file, input_mp3_path = get_base_data_folder()
+    print(f"selected input_mp3_path -> {input_mp3_path}")
     # TODO : base folder setup function to be added to all files
     # Generate the filename and folder based on the current time
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -200,7 +201,7 @@ if __name__ == "__main__":
         SAVE_DIR,
         story_dict.get("sentences", {}),
         timestamp,
-        2,
+        1,
     )
 
     # Define the final image output path
