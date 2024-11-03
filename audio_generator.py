@@ -39,7 +39,7 @@ def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
     combined_audio = AudioSegment.empty()
 
     for key, value in sentences.items():
-        sentence = value.get("sentence", "").strip()
+        sentence = value.get("sentence", "").strip().replace("\n\n", " ")
         if not sentence:
             continue  # Skip if the sentence is empty
 
@@ -76,7 +76,7 @@ def generate_audio_from_json(folder_path, input_mp3="sample_5.mp3"):
 
 if __name__ == "__main__":
     # Define the high-level folder path where the JSON file is located
-    folder_path = r"E:\Ember\Ember\ember\data\20240904192910"
+    folder_path = r"E:\Ember\Ember\ember\data\20241101095007"
     input_mp3_path = "sample_5.mp3"
 
     # Call the function to generate audio from the JSON file
