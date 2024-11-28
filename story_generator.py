@@ -7,7 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate, FewShotChatMessagePromptT
 from langchain.schema.output_parser import StrOutputParser
 from datetime import datetime
 import json
-
+from story_agent import story_prompt_generating_agent, story_beat_generating_agent
 
 def generate_short_script(input_dict):
     # Load environment variables
@@ -146,16 +146,17 @@ def generate_youtube_title_description(story):
         [
             (
                 "system",
-                "You are an expert in creating concise, captivating YouTube titles that reflect the core essence of a story. \
-            Your task is to generate only the YouTube title, no additional text or special characters, ensuring it is engaging, short, and to the point. \
-            Do not use quotation marks or any unnecessary punctuation in the title.",
+                """You are an expert at crafting concise, captivating YouTube titles that reflect the core of a story in as few words as possible. 
+                Your task is to generate only the YouTube title, keeping it short, engaging, and to the point.
+                Avoid any extra text, special characters, or punctuation—just the title itself.""",
             ),
             (
                 "human",
-                f"Generate a compelling YouTube title for the following story:\n\n{story}",
+                f"Create a compelling YouTube title for the story below:\n\n{story}",
             ),
         ]
     )
+
 
     description_prompt = ChatPromptTemplate.from_messages(
         [
@@ -243,7 +244,33 @@ Focus on delivering a specific emotional experience through the story.
     )
 
     result = story_final_prompt | model | StrOutputParser()
-    return result.invoke({"input_dict": input_dict})
+
+
+
+
+
+    # return result.invoke({"input_dict": input_dict})
+
+    input_text = f""" Using the topic provided generate a Beats 
+    TOPIC : {input_dict['topic']}
+ 
+                """
+    generated_beats = story_beat_generating_agent(input_text)
+
+    print(f"generated beats ---> {generated_beats}")
+
+    input_text = f""" Using the topic and beats provided generate a story 
+    PLOT : {input_dict['topic']}
+
+    BEATS : {generated_beats}
+ 
+                """
+    print("####################################################")
+    generated_story = story_prompt_generating_agent(input_text)
+    print(f"generated_story ---> {generated_story}")
+
+
+    return generated_story
 
 
 def get_characters_locations(story):
@@ -252,23 +279,47 @@ def get_characters_locations(story):
     # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
     # Define the prompt to generate the dictionary for characters and locations
+    # Define the prompt to generate the YouTube title and description
+    # character_location_prompt = ChatPromptTemplate.from_messages(
+    #     [
+    #         (
+    #             "system",
+    #             "You are an expert in extracting precise, structured data from stories. Your task is to read the provided story and generate only a Python dictionary with two keys: 'characters' and 'locations'.\n\n- 'characters' should contain only the names of characters explicitly mentioned in the story.\n- 'locations' should contain only the names of physical places explicitly mentioned in the story.\n\nBe very specific and avoid adding any details or formatting outside of the dictionary structure. Provide the dictionary as the output with no explanation or additional information. Here is the story:",
+    #         ),
+    #         (
+    #             "human",
+    #             f"Read the following story and extract the data precisely. Return only a Python dictionary with two keys: 'characters' and 'locations', where 'characters' contains the names of characters and 'locations' contains the names of places from the story. Be specific and precise in what is returned:\n\n{story}",
+    #         ),
+    #     ]
+    # )
+
     character_location_prompt = ChatPromptTemplate.from_messages(
-        [
-            (
-                "system",
-                "You are an expert in extracting precise, structured data from stories. Your task is to read the provided story and generate only a Python dictionary with two keys: 'characters' and 'locations'.\n\n- 'characters' should contain only the names of characters explicitly mentioned in the story.\n- 'locations' should contain only the names of physical places explicitly mentioned in the story.\n\nBe very specific and avoid adding any details or formatting outside of the dictionary structure. Provide the dictionary as the output with no explanation or additional information. Here is the story:",
-            ),
-            (
-                "human",
-                f"Read the following story and extract the data precisely. Return only a Python dictionary with two keys: 'characters' and 'locations', where 'characters' contains the names of characters and 'locations' contains the names of places from the story. Be specific and precise in what is returned:\n\n{story}",
-            ),
-        ]
-    )
+    [
+        (
+            "system",
+            """You are an expert in extracting precise, structured data from stories. Your task is to read the provided story and generate only a JSON-compatible dictionary with two keys: "characters" and "locations".
+
+            - **"characters"** should contain only the names of characters explicitly mentioned in the story. Ensure that at least one main character is included. Exclude any characters referred to only by pronouns (such as "he," "she," or "her") without a proper name.
+            - **"locations"** should include minimal, context-specific descriptors that convey where the character is in each scene (e.g., "room," "forest," "hallway") without needing explicit place names. Ensure at least one location descriptor is included to provide setting context.
+
+            Be extremely specific and strict in your response: return only the JSON structure exactly as requested, using double quotes for all keys and string values, with no additional details, explanations, formatting, or extra text. The output must be in JSON format for compatibility with parsing tools and both fields ("characters" and "locations") must contain data. Here is the story: {story}""",
+        ),
+        (
+            "human",
+            f"Read the following story and extract the data precisely. Return only a JSON-compatible dictionary with two keys: 'characters' and 'locations'. For 'characters', include only explicitly named characters (at least one), excluding any who are only referenced with pronouns ('he,' 'she,' etc.). For 'locations', include minimal descriptors that specify where the character is in each scene (e.g., 'room,' 'forest,' 'hallway') with at least one location. Be specific and precise in what is returned:\n\n{story}",
+        ),
+    ]
+)
+
+
+
+
+
 
     # Process the story using the model
     character_location_result = character_location_prompt | model | StrOutputParser()
     character_location_response = character_location_result.invoke(
-        {"input_dict": {"story": story}}
+        { "story": story}
     )
 
     return character_location_response
@@ -279,19 +330,33 @@ def get_character_description(story, character):
     model = ChatOpenAI(model="gpt-4o-mini")
     # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
 
-    # Define the prompt to generate the YouTube title and description
     character_description_prompt = ChatPromptTemplate.from_messages(
-        [
-            (
-                "system",
-                "You are an expert in extracting concise physical descriptions from stories. Your task is to read the provided story and define the given character based on their physical appearance, focusing strictly on elements that can be used for image generation. You should define the following:\n\n- Gender\n- Age category (e.g., kid, teenager, adult, or old person)\n- What they are wearing, with a focus on simple details like colors (e.g., t-shirt, hoodie, pants, shoes)\n- Identifying physical features like hairstyle, hair color, or any distinct accessory (e.g., glasses, watch).\n\nThe description should be short and suitable for input into an image generator. Do not include any actions or backstory, only the physical appearance. Provide the description as plain text with no special characters or headings.",
-            ),
-            (
-                "human",
-                f"Read the following story and describe the physical appearance of the character '{character}' as per the instructions. Include their age category, gender, clothing with simple color details, and identifying features. Return the description as plain text:\n\n{story}",
-            ),
-        ]
-    )
+    [
+        (
+            "system",
+            """You are an expert in extracting concise physical descriptions from stories for image generation. Your task is to read the provided story and define the given character based on their physical appearance, focusing strictly on elements that can be used for image generation. Define the following:
+
+            - **Name**: Include the character’s name as specified in the story.
+            - **Gender**: Specify the character’s gender strictly as either "male" or "female."
+            - **Age**: Include the exact age if specified, or infer if directly implied in the story. If not available, make a plausible estimate consistent with the story context.
+            - **Hair Color and Length**: Describe the character's hair color and length. If not mentioned, create a reasonable description that fits the story’s context.
+            - **Dress Details**: Provide a detailed description of the character’s attire, using simple, PG-13 appropriate descriptions, including color and type (e.g., "blue t-shirt, black pants"). If dress details are not specified, invent attire that aligns with the story setting and character role.
+            - **Accessories**: Include any distinct accessories relevant to the character’s portrayal (e.g., glasses, watch). If not mentioned, you may add accessories that fit the story context.
+
+            If any details (such as age, hair color, dress, or accessories) are not specified in the story, you should create them, ensuring they remain consistent with the story’s setting and are PG-13 appropriate.
+
+            The description should be concise, suitable for input into an image generator, and focus only on the character’s physical appearance. Avoid including any actions or backstory. Return the description as plain text with no dictionary structure, special characters, or headings.""",
+        ),
+        (
+            "human",
+            f"Read the following story and describe the physical appearance of the character '{character}' as per the instructions. Include their name, gender (either 'male' or 'female'), exact age if given or inferred, hair color and length, PG-13 appropriate clothing with colors, and identifying accessories. If these details are missing, create them in a way that fits the story context. Return only the description as plain text. STORY: {story}",
+        ),
+    ]
+)
+
+
+
+
 
     # Process the story using the model
     character_description_result = (
@@ -311,17 +376,26 @@ def get_location_description(story, location):
 
     # Define the prompt to generate the location description
     location_description_prompt = ChatPromptTemplate.from_messages(
-        [
-            (
-                "system",
-                "You are an expert in extracting precise, concise descriptions of locations from stories. Your task is to read the provided story and define the given location based on clear, specific physical features that can be used consistently for image generation. You should focus on:\n\n- Key structures or formations (e.g., stone walls, narrow alley, tall skyscraper)\n- Exact atmosphere (e.g., dark, foggy, warm, bright)\n- Unique visual features (e.g., neon signs, glowing crystals, ancient statues)\n\nThe description should be short and precise with no vague terms. Do not include actions or backstory, only physical elements. Provide the description as plain text with no special characters or headings.",
-            ),
-            (
-                "human",
-                f"Read the following story and describe the key physical features of the location '{location}' as per the instructions. Include structure, atmosphere, and any unique features. Return the description as plain text:\n\n{story}",
-            ),
-        ]
-    )
+    [
+        (
+            "system",
+            """You are an expert in extracting precise, structured data from stories. Your task is to read the provided story and generate a concise, detailed description of a specified location. 
+
+            - **Location Details**: For the given location, include:
+                - Whether the location is an indoor or outdoor setting.
+                - Standout, recognizable features that make the location distinct (e.g., "a room with high vaulted ceilings," "a dense forest with towering pine trees").
+                - Ensure that descriptions are accurate and consistent with the story’s context to enhance the recognizability of each location.
+
+            Be very specific and provide only the description of the location, with no additional formatting, dictionary structures, or extra text. Here is the story:""",
+        ),
+        (
+            "human",
+            f"Read the following story and describe the location '{location}' in detail. Include whether it is indoors or outdoors and any standout, recognizable features to ensure consistency with the story’s context. Return only the description as plain text. STORY :{story}",
+        ),
+    ]
+)
+
+
 
     # Process the story using the model
     location_description_result = (
@@ -350,10 +424,15 @@ def get_story_elements(story):
     # Create empty dictionaries for characters and locations
     characters = {}
     locations = {}
+    gender = "male"
 
     for character in characters_loc_dict.get("characters", {}):
         print(f"generating character description for {character}")
         characters[character] = get_character_description(story, character)
+        # TODO fix this later - only one character works, multiple will fail
+        if "female" in  characters[character].lower():
+            gender = "female"
+
     for location in characters_loc_dict.get("locations", {}):
         print(f"generating lcoation description for {location}")
         locations[location] = get_location_description(story, location)
@@ -362,6 +441,7 @@ def get_story_elements(story):
     print(f"locations ->{locations}")
     story_elements["characters"] = characters
     story_elements["locations"] = locations
+    story_elements["gender"] = gender
     return story_elements
 
 
@@ -375,8 +455,7 @@ if __name__ == "__main__":
     }
     story = generate_story(model, input_dict)
     print(f"story ---> {story}")
-    story = generate_short_script(input_dict)
-    print(f"story --> {story}")
+
     # Improve the generated story twice
     improved_story = improve_story(story, iterations=iteration_needed)
     improved_story = story

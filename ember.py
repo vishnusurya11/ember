@@ -25,6 +25,7 @@ from image_generator import (
     generate_images_for_prompts,
     extract_timestamp_from_path,
     generate_thumbnail,
+    get_image_path,
 )
 from video_generator import generate_and_concatenate_videos
 from langchain_openai import ChatOpenAI
@@ -171,8 +172,10 @@ if __name__ == "__main__":
 
     # Server and workflow configurations for image generation
     SERVER_ADDRESS = "127.0.0.1:8188"
-    WORKFLOW_FILE = "flux_dev_space_example_16.json"
+    # WORKFLOW_FILE = "flux_dev_space_example_16.json"
+    WORKFLOW_FILE = "flux_pulid.json"
     SAVE_DIR = folder_name
+    IMAGE_PATH = get_image_path(story_dict["story_elements"]["gender"])
 
     # # Generate images for the prompts
     # print("\nGenerating images for the prompts...")
@@ -192,6 +195,7 @@ if __name__ == "__main__":
         WORKFLOW_FILE,
         SAVE_DIR,
         story_dict["youtube_details"]["thumbnail_prompt"],
+        IMAGE_PATH,
         timestamp,
         3,
     )
@@ -201,6 +205,7 @@ if __name__ == "__main__":
         WORKFLOW_FILE,
         SAVE_DIR,
         story_dict.get("sentences", {}),
+        IMAGE_PATH,
         timestamp,
         1,
     )

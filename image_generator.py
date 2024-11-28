@@ -12,7 +12,7 @@ def extract_timestamp_from_path(path):
 
 
 def generate_images_for_prompts(
-    server_address, workflow_file, save_dir, sentences, timestamp, num_iterations=3
+    server_address, workflow_file, save_dir, sentences,IMAGE_PATH, timestamp, num_iterations=3
 ):
     generator = ImageGenerator(server_address, workflow_file)
 
@@ -20,7 +20,8 @@ def generate_images_for_prompts(
     # os.makedirs(images_folder, exist_ok=True)
 
     for key, value in tqdm(sentences.items(), desc="Generating Images for Sentences"):
-        prompt = value.get("prompt", "").strip()
+        # prompt = value.get("prompt", "").strip()
+        prompt = value.get("prompt_agent", "").strip()
         if not prompt:
             continue  # Skip if the prompt is empty
 
@@ -30,23 +31,37 @@ def generate_images_for_prompts(
 
             api_prefix = f"api/{timestamp}/{key}/{i+1:02}"
 
+            # updates = {
+            #     "6": {
+            #         "text": prompt,
+            #     },
+            #     "25": {
+            #         "noise_seed": seed,
+            #     },
+            #     "41": {
+            #         "filename_prefix": f"{api_prefix}_hires/",
+            #     },
+            #     "9": {
+            #         "filename_prefix": f"{api_prefix}_facefix/",
+            #     },
+            #     "38": {
+            #         "lora_name": "flux\\flux_realisim_hf.safetensors",
+            #     },
+            # }
             updates = {
-                "6": {
-                    "text": prompt,
-                },
-                "25": {
-                    "noise_seed": seed,
-                },
-                "41": {
-                    "filename_prefix": f"{api_prefix}_hires/",
-                },
-                "9": {
-                    "filename_prefix": f"{api_prefix}_facefix/",
-                },
-                "38": {
-                    "lora_name": "flux\\flux_realisim_hf.safetensors",
-                },
+            "6": {
+                "text": prompt,
+            },
+            "25": {
+                "noise_seed": seed,
+            },
+            "70": {
+                "filename_prefix": f"{api_prefix}_hires_facefix/",
+            },
+            "54": {
+                "image": IMAGE_PATH,
             }
+        }
 
             generator.generate_images(save_dir, updates=updates)
 
@@ -58,6 +73,7 @@ def generate_thumbnail(
     workflow_file,
     save_dir,
     thumbnail_prompt,
+    IMAGE_PATH,
     timestamp,
     num_iterations=3,
 ):
@@ -73,6 +89,24 @@ def generate_thumbnail(
 
         api_prefix = f"api/{timestamp}/thumbnail/{i+1:02}"
 
+        # updates = {
+        #     "6": {
+        #         "text": thumbnail_prompt,
+        #     },
+        #     "25": {
+        #         "noise_seed": seed,
+        #     },
+        #     "41": {
+        #         "filename_prefix": f"{api_prefix}_hires/",
+        #     },
+        #     "9": {
+        #         "filename_prefix": f"{api_prefix}_facefix/",
+        #     },
+        #     "38": {
+        #         "lora_name": "flux\\flux_realisim_hf.safetensors",
+        #     },
+        # }
+
         updates = {
             "6": {
                 "text": thumbnail_prompt,
@@ -80,26 +114,29 @@ def generate_thumbnail(
             "25": {
                 "noise_seed": seed,
             },
-            "41": {
-                "filename_prefix": f"{api_prefix}_hires/",
+            "70": {
+                "filename_prefix": f"{api_prefix}_hires_facefix/",
             },
-            "9": {
-                "filename_prefix": f"{api_prefix}_facefix/",
-            },
-            "38": {
-                "lora_name": "flux\\flux_realisim_hf.safetensors",
+            "54": {
+                "image": IMAGE_PATH,
             },
         }
-
         generator.generate_images(save_dir, updates=updates)
 
     return True
 
 
+def get_image_path(gender):
+
+    if gender == "male":
+        return "C:\\Users\\vishn\\Downloads\\male.png"
+    else:
+        return "C:\\Users\\vishn\\Downloads\\female.png"
+
 if __name__ == "__main__":
     # High-level path provided
-    base_folder = r"E:\Ember\Ember\ember\data\20241013142553"
-    num_iterations = 3
+    base_folder = r"E:\Ember\Ember\ember\data\20241108214216"
+    num_iterations = 1
     # Extract the timestamp from the base folder path
     timestamp = extract_timestamp_from_path(base_folder)
 
@@ -119,8 +156,10 @@ if __name__ == "__main__":
 
     # Server and workflow configurations
     SERVER_ADDRESS = "127.0.0.1:8188"
-    WORKFLOW_FILE = "flux_dev_space_example_16_updated.json"
+    # WORKFLOW_FILE = "flux_dev_space_example_16_updated.json"
+    WORKFLOW_FILE = "flux_pulid.json"
     SAVE_DIR = base_folder
+    IMAGE_PATH = get_image_path(story_data["story_elements"]["gender"])
 
     # generate thumbnail
     generate_thumbnail(
@@ -128,6 +167,7 @@ if __name__ == "__main__":
         WORKFLOW_FILE,
         SAVE_DIR,
         story_data["youtube_details"]["thumbnail_prompt"],
+        IMAGE_PATH,
         timestamp,
         num_iterations,
     )
@@ -138,6 +178,7 @@ if __name__ == "__main__":
         WORKFLOW_FILE,
         SAVE_DIR,
         story_data.get("sentences", {}),
+        IMAGE_PATH,
         timestamp,
         num_iterations,
     )

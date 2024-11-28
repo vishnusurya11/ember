@@ -158,7 +158,7 @@ def generate_and_concatenate_videos(
 
 
 if __name__ == "__main__":
-    base_folder = r"E:\Ember\Ember\ember\data\20240904192910"
+    base_folder = r"E:\Ember\Ember\ember\data\20241103112450"
 
     # Load the story config to get the images_output_folder
     json_file = os.path.join(base_folder, f"codex_{os.path.basename(base_folder)}.json")

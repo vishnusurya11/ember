@@ -5,13 +5,14 @@ from langchain_openai import ChatOpenAI
 # from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate, FewShotChatMessagePromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-
+from prompt_agent import image_prompt_generating_agent, youtube_thumbnail_prompt_generating_agent
 
 def generate_context_for_sentences(sentences, story, story_elements):
     # Create a ChatOpenAI model
     model = ChatOpenAI(model="gpt-4o-mini")
     # model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
-
+    characters_str = str(story_elements['characters']).replace("{", "").replace("}", "")
+    locations_str = str(story_elements['locations']).replace("{", "").replace("}", "")
     # Iterate through sentences and generate prompts
     for key, value in sentences.items():
         print(f"key --> {key}  value --> {value}")
@@ -21,29 +22,54 @@ def generate_context_for_sentences(sentences, story, story_elements):
 
         # Create the final prompt template for generating a prompt for the
         # sentence
+#         prompt_generation = ChatPromptTemplate.from_messages([
+#     (
+#         "system",
+#         """
+#         You are a concise storytelling expert. For each sentence:
+#         1. Identify key characters.
+#         2. Summarize the immediate context in 1-2 sentences.
+#         Provide only essential information. Keep the total response under 50 words.
+#         """
+#     ),
+#     (
+#         "human",
+#         """
+#         Briefly explain the context for this sentence:
+#         "{sentence}"
+#         From the story: "{story}"
+#         Who is involved and what's happening? (Max 50 words)
+#         """
+#     )
+# ])
         prompt_generation = ChatPromptTemplate.from_messages([
     (
         "system",
         """
         You are a concise storytelling expert. For each sentence:
-        1. Identify key characters.
-        2. Summarize the immediate context in 1-2 sentences.
-        Provide only essential information. Keep the total response under 50 words.
+        1. Identify key characters involved.
+        2. Define the location with details from locations_str, specifying whether it is indoors or outdoors, and include any distinguishing features.
+        3. Describe the exact action the character is performing at that moment.
+        4. Include the time of day if specified or implied in the sentence.
+
+        Provide only essential information and keep the total response under 50 words.
         """
     ),
-    (
-        "human",
-        """
-        Briefly explain the context for this sentence:
-        "{sentence}"
-        From the story: "{story}"
-        Who is involved and what's happening? (Max 50 words)
-        """
-    )
-])
+        (
+            "human",
+            """
+            Briefly explain the context for this sentence:
+            "{sentence}"
+            From the story: "{story}"
+            
+            Who is involved, where are they, and what exactly are they doing? Use {locations_str} for location details, and include whether the setting is indoors or outdoors. (Max 50 words)
+            """
+        )
+    ])
+
 
         result = prompt_generation | model | StrOutputParser()
-        generated_prompt = result.invoke({"sentence": sentence, "story":story})
+        generated_prompt = result.invoke({"sentence": sentence, "story":story, "locations_str" : locations_str})
         # Add the generated prompt to the sentence
         sentences[key]["context"] = generated_prompt
 
@@ -92,6 +118,21 @@ For example:
         generated_prompt = result.invoke({"input": sentence})
         # Add the generated prompt to the sentence
         sentences[key]["prompt"] = generated_prompt
+        style = "Realistic"
+        input_text = f"""
+                 a scene of {sentence} use the immediate scene description from {context}, combined with character details from {characters_str} and location descriptions from {locations_str}, to bring the scene to life. Focus on 3-4 key visual elements that define the moment, ensuring that the characters' appearance—including age, gender, clothing, and posture—matches {characters_str}, and the setting reflects the environment described in {locations_str}.
+
+                In this specific scene, {sentence} is actively engaged in an important action that reflects their emotional and narrative role within {context}. Draw attention to their body language and facial expressions to convey the emotional intensity—whether it’s fear, determination, joy, or sorrow. The characters should be shown interacting with their surroundings, with meaningful objects, landscape features, or architectural elements from {context} that further enhance the emotional tone of the moment.
+
+                The mood should evoke feelings of [insert emotional tone relevant to the scene], rendered in the vibrant and expressive style of anime. The lighting should complement this, with soft glows, sharp contrasts, or dynamic highlights that emphasize the characters and setting. The perspective should be cinematic, giving a strong sense of action or stillness, depending on the scene’s immediate tension or tranquility.
+                (Max 100 words)
+                Style : {style}
+                For example:
+
+                'a 20 year old man standing in a crumbling temple, surrounded by overgrown vines and ancient stone statues. His tattered cloak flutters in the wind as he gazes up at a massive stone door, half-buried by fallen debris. The air is thick with dust, and beams of sunlight filter through cracks in the ceiling, casting long shadows over the floor. His expression is a mix of awe and determination as he places his hand on the door, ready to push it open. Behind him, the dense jungle threatens to reclaim the ruins, and a distant roar hints at the danger lurking nearby. The atmosphere is one of tension and mystery, brought to life with sharp lines and vibrant colors, while the crumbling temple and encroaching vines enhance the sense of impending discovery.'
+                """
+
+        sentences[key]["prompt_agent"] = image_prompt_generating_agent(input_text)
 
     return sentences
 
@@ -128,7 +169,26 @@ Example: Design a surreal and chaotic anime movie poster for "Fear and Loathing 
 
 
     result = prompt_generation | model | StrOutputParser()
-    generated_prompt = result.invoke({"input": youtube_title})
+    # generated_prompt = result.invoke({"input": youtube_title})
+
+    input_text = f"""
+Design a richly artistic movie-poster-style thumbnail for "{youtube_title}" that brings the core themes of the story to life in a visually compelling and cinematic way, avoiding any anime or cartoon elements.
+
+The central figure has {characters_str} (focus on symbolic and artistic representations of their physical traits, such as their posture, attire, or any distinct accessories, that reflect their role in the story). Surround them with {locations_str}—transforming the setting into a surreal or abstract version that reflects the emotional tone and deeper themes of the narrative.
+
+Incorporate symbolic elements from the story, like [insert key symbolic objects], to create an artistic fusion of reality and fantasy, where every detail in the poster contributes to the story's thematic essence. The mood should feel cinematic, evocative, and richly textured, using bold lines, dynamic compositions, and expressive colors to immerse the viewer in the story’s world.
+
+Emphasize a photographic and realistic quality, enhancing the thumbnail with professional color grading and lighting to evoke a sense of depth and intensity. Avoid animated or stylized features, focusing instead on lifelike details and dramatic contrasts typical of high-quality movie posters.
+
+The YouTube title "{youtube_title}" should be seamlessly integrated into the composition, enhancing the artistic feel without overpowering the scene. Keep the prompt under 100 words, ensuring a cohesive and impactful movie-poster-style thumbnail that captures the essence and emotion of the story.
+
+Example: Design a surreal and chaotic movie poster for "Fear and Loathing in Moscow," blending elements of dark humor and the unpredictable atmosphere of a foreign city. The central figure is a man in a disheveled suit, wearing round sunglasses and a fur hat, with a crazed look on his face. The background is a distorted, neon-lit version of Moscow's Red Square, with iconic landmarks like St. Basil's Cathedral twisted and warped as if in a dream or hallucination. The sky is swirling with psychedelic colors—bright reds, purples, and greens—creating a sense of confusion and mania. The title 'Fear and Loathing in Moscow' should be written in wild, erratic fonts, with splashes of color, capturing the chaotic, offbeat tone of the film.
+
+STORY: {story}
+"""
+
+
+    generated_prompt = youtube_thumbnail_prompt_generating_agent(input_text)
 
     return generated_prompt
 
@@ -153,7 +213,7 @@ def split_story_into_sentences(story):
 # Main logic
 if __name__ == "__main__":
     # High-level path provided
-    base_folder = r"E:\Ember\Ember\ember\data\20241020092918"
+    base_folder = r"E:\Ember\Ember\ember\data\20241103094310"
 
     # Find the JSON file that starts with "codex" in the provided directory
     json_file = None
